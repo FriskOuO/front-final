@@ -1,0 +1,80 @@
+{
+  "common": {
+    "backToHome": "返回首頁",
+    "upright": "正位",
+    "reversed": "逆位"
+  },
+  "home": {
+    "title": "塔羅牌占卜",
+    "subtitle": "探索生命旅程的洞見",
+    "intro": "歡迎體驗塔羅牌占卜。塔羅牌可以為你的生活問題提供指引和洞察。填寫下面的表單開始你的占卜。",
+    "footer": "© 2025 塔羅占卜應用"
+  },
+  "form": {
+    "title": "開始你的占卜",
+    "name": "你的名字",
+    "namePlaceholder": "請輸入你的名字",
+    "topic": "問題或主題",
+    "topicPlaceholder": "你想要獲得什麼指引？",
+    "cardCount": "選擇占卜類型",
+    "card": "張牌",
+    "cards": "張牌",
+    "submit": "開始占卜",
+    "submitting": "處理中..."
+  },
+  "validation": {
+    "nameRequired": "請輸入你的名字",
+    "topicRequired": "請輸入問題或主題",
+    "cardCountRequired": "請選擇占卜類型"
+  },
+  "draw": {
+    "title": "抽取你的牌",
+    "greeting": "你好，{{name}}",
+    "topic": "我們正在關注：{{topic}}",
+    "instruction": "為你的占卜抽取 {{count}} 張牌",
+    "drawing": "正在抽牌中...",
+    "redraw": "重新抽牌",
+    "seeResult": "查看占卜結果"
+  },
+  "result": {
+    "title": "你的塔羅占卜",
+    "for": "為 {{name}} 的占卜",
+    "regarding": "關於：{{topic}}",
+    "intro": "這是你的個人塔羅占卜。每個牌位對於你的問題都有特殊的意義。",
+    "position1": "當前情況",
+    "position2": "挑戰或障礙",
+    "position3": "最佳行動方案",
+    "position4": "過去的影響",
+    "position5": "未來的潛力",
+    "position6": "最終結果",
+    "interpretation": "在{{position}}的位置，{{card}}表示{{meaning}}。",
+    "conclusion": "花時間思考這個占卜結果。牌只是提供指導，但你有能力塑造自己前進的道路。",
+    "newReading": "開始新的占卜"
+  },
+  "cards": {
+    "major_00": {
+      "name": "愚人",
+      "upright": "新的開始，自發性，信念，表面上的愚蠢實際上是深層智慧",
+      "reversed": "魯莽，不經思考的冒險，判斷力差"
+    }
+  },
+  "navbar": {
+    "tarotGuide": "塔羅牌指南"
+  },
+  "guide": {
+    "title": "塔羅牌指南",
+    "intro": "探索塔羅牌的神秘世界。這裡提供每張塔羅牌的詳細解釋，包括正位和逆位的含義。選擇特定類別或搜索特定牌來了解更多。",
+    "searchPlaceholder": "搜尋塔羅牌...",
+    "allCards": "全部牌",
+    "majorArcana": "大牌陣",
+    "cups": "聖杯",
+    "swords": "寶劍",
+    "pentacles": "錢幣",
+    "wands": "權杖",
+    "major": "大牌陣",
+    "minorCups": "小牌陣 - 聖杯",
+    "minorSwords": "小牌陣 - 寶劍",
+    "minorPentacles": "小牌陣 - 錢幣",
+    "minorWands": "小牌陣 - 權杖"
+  }
+}

@@ -1,0 +1,72 @@
+.draw-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 40px; /* 頂部留出導覽列的空間 */
+}
+
+.language-switcher-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.user-info {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.result-button {
+  padding: 12px 24px;
+  background-color: #6b5b95;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.result-button:hover {
+  background-color: #574a79;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-link button {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.back-link button:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}

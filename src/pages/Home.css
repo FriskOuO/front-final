@@ -1,0 +1,153 @@
+.home-container {
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 80px 0 0 0; /* 頂部增加導覽列高度的 padding */
+  position: relative;
+}
+
+/* 暗色覆蓋層 - 調整透明度 */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* 可以調整透明度，數值範圍 0-1 */
+  z-index: 1;
+}
+
+/* 確保所有內容顯示在覆蓋層上方 */
+.home-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-top: 50px;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  color: #f8d568; /* 金色標題，與圖中的塔羅牌顏色相呼應 */
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #f5f5f5; /* 淺色副標題 */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.intro-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* 表單容器樣式修改 */
+.tarot-form-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 215, 0, 0.3); /* 金色邊框 */
+}
+
+/* 表單標題 */
+.tarot-form-container h2 {
+  color: #f8d568;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+/* 表單內的標籤 */
+.form-group label {
+  color: #f0f0f0;
+}
+
+/* 輸入框樣式 */
+.form-group input[type="text"] {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #664d00;
+}
+
+/* 卡片計數選項 */
+.card-count-options label {
+  color: #e0e0e0;
+}
+
+/* 提交按鈕 */
+.tarot-form button[type="submit"] {
+  background-color: #b8860b; /* 暗金色按鈕 */
+  transition: background-color 0.3s;
+}
+
+.tarot-form button[type="submit"]:hover {
+  background-color: #daa520; /* 亮金色 */
+}
+
+footer {
+  margin-top: 60px;
+  text-align: center;
+  color: #aaa;
+  padding: 20px 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* 在現有 CSS 檔案中添加 */
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.home-logo {
+  max-width: 250px;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); /* 添加金色光暈效果 */
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .home-logo {
+    max-width: 180px;
+  }
+}

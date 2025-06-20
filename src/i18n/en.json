@@ -1,0 +1,80 @@
+{
+  "common": {
+    "backToHome": "Back to Home",
+    "upright": "Upright",
+    "reversed": "Reversed"
+  },
+  "home": {
+    "title": "Tarot Card Reading",
+    "subtitle": "Discover insights into your life's journey",
+    "intro": "Welcome to the Tarot Card Reading experience. Tarot cards can provide guidance and insight into your life's questions. Fill out the form below to begin your reading.",
+    "footer": "© 2025 Tarot Reading App"
+  },
+  "form": {
+    "title": "Start Your Reading",
+    "name": "Your Name",
+    "namePlaceholder": "Enter your name",
+    "topic": "Question or Topic",
+    "topicPlaceholder": "What would you like guidance on?",
+    "cardCount": "Select Reading Type",
+    "card": "card",
+    "cards": "cards",
+    "submit": "Start Reading",
+    "submitting": "Processing..."
+  },
+  "validation": {
+    "nameRequired": "Please enter your name",
+    "topicRequired": "Please enter a question or topic",
+    "cardCountRequired": "Please select a reading type"
+  },
+  "draw": {
+    "title": "Drawing Your Cards",
+    "greeting": "Hello, {{name}}",
+    "topic": "We're focusing on: {{topic}}",
+    "instruction": "Drawing {{count}} cards for your reading",
+    "drawing": "Drawing your cards...",
+    "redraw": "Draw Again",
+    "seeResult": "View Your Reading"
+  },
+  "result": {
+    "title": "Your Tarot Reading",
+    "for": "Reading for: {{name}}",
+    "regarding": "Regarding: {{topic}}",
+    "intro": "Here is your personalized tarot reading. Each card position has a special meaning in relation to your question.",
+    "position1": "The Present Situation",
+    "position2": "Challenge or Obstacle",
+    "position3": "Best Course of Action",
+    "position4": "Past Influence",
+    "position5": "Future Potential",
+    "position6": "Final Outcome",
+    "interpretation": "In the position of {{position}}, {{card}} suggests {{meaning}}.",
+    "conclusion": "Take time to reflect on this reading. The cards offer guidance, but you have the power to shape your path forward.",
+    "newReading": "Start a New Reading"
+  },
+  "cards": {
+    "major_00": {
+      "name": "The Fool",
+      "upright": "new beginnings, spontaneity, faith, apparent foolishness that is actually deep wisdom",
+      "reversed": "recklessness, risk-taking without thought, poor judgment"
+    }
+  },
+  "navbar": {
+    "tarotGuide": "Tarot Guide"
+  },
+  "guide": {
+    "title": "Tarot Card Guide",
+    "intro": "Explore the mystical world of tarot cards. Here you'll find detailed explanations of each tarot card, including both upright and reversed meanings. Choose a specific category or search for a specific card to learn more.",
+    "searchPlaceholder": "Search tarot cards...",
+    "allCards": "All Cards",
+    "majorArcana": "Major Arcana",
+    "cups": "Cups",
+    "swords": "Swords",
+    "pentacles": "Pentacles",
+    "wands": "Wands",
+    "major": "Major Arcana",
+    "minorCups": "Minor Arcana - Cups",
+    "minorSwords": "Minor Arcana - Swords",
+    "minorPentacles": "Minor Arcana - Pentacles",
+    "minorWands": "Minor Arcana - Wands"
+  }
+}
