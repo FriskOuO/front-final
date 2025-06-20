@@ -2,13 +2,16 @@
   "common": {
     "backToHome": "返回首頁",
     "upright": "正位",
-    "reversed": "逆位"
+    "reversed": "逆位",
+    "loading": "載入中...",
+    "locale": "zh"
   },
   "home": {
-    "title": "塔羅牌占卜",
-    "subtitle": "探索生命旅程的洞見",
-    "intro": "歡迎體驗塔羅牌占卜。塔羅牌可以為你的生活問題提供指引和洞察。填寫下面的表單開始你的占卜。",
-    "footer": "© 2025 塔羅占卜應用"
+    "title": "神秘塔羅",
+    "subtitle": "探索命運的奧秘",
+    "intro": "歡迎來到神秘塔羅世界，在這裡，古老的智慧將為您揭示生活中的隱藏真相。無論您面臨什麼樣的問題或處於何種人生階段，塔羅牌都能提供深刻的洞見和引導。請放鬆心情，集中思緒，讓塔羅牌為您解讀命運的密碼。",
+    "startExperience": "開始塔羅之旅",
+    "footer": "© 2025 神秘塔羅 | 所有權利保留"
   },
   "form": {
     "title": "開始你的占卜",
@@ -28,13 +31,14 @@
     "cardCountRequired": "請選擇占卜類型"
   },
   "draw": {
-    "title": "抽取你的牌",
-    "greeting": "你好，{{name}}",
-    "topic": "我們正在關注：{{topic}}",
-    "instruction": "為你的占卜抽取 {{count}} 張牌",
-    "drawing": "正在抽牌中...",
-    "redraw": "重新抽牌",
-    "seeResult": "查看占卜結果"
+    "title": "抽選塔羅牌",
+    "instruction": "請從牌桌上選擇 {count} 張牌",
+    "cardsSelected": "已選擇 {selected}/{total} 張牌",
+    "greeting": "你好，{name}",
+    "intentPrompt": "你的問題",
+    "shuffling": "正在洗牌...",
+    "deck": "塔羅牌組",
+    "reset": "重新洗牌"
   },
   "result": {
     "title": "你的塔羅占卜",
@@ -71,10 +75,37 @@
     "swords": "寶劍",
     "pentacles": "錢幣",
     "wands": "權杖",
-    "major": "大牌陣",
-    "minorCups": "小牌陣 - 聖杯",
-    "minorSwords": "小牌陣 - 寶劍",
-    "minorPentacles": "小牌陣 - 錢幣",
-    "minorWands": "小牌陣 - 權杖"
+    "upright": "正位",
+    "reversed": "逆位",
+    "noResults": "沒有找到符合的塔羅牌"
+  },
+  "introFlow": {
+    "chooseIntent": "選擇你的起心動念",
+    "intentDescription": "請選擇一個最符合你現在想法的選項，以獲得更精確的塔羅指引",
+    "chooseCardCount": "選擇抽幾張牌",
+    "cardCountDescription": "不同數量的牌組將提供不同深度的解讀",
+    "enterName": "輸入你的名字",
+    "nameDescription": "你的名字將有助於能量共振",
+    "namePlaceholder": "請輸入你的名字（可選）",
+    "nameNote": "輸入你的名字來共振能量（可跳過）",
+    "advancedSettings": "進階設定",
+    "deckDescription": "若你希望探索深層課題或靈魂旅程，可選擇僅使用大阿爾克納牌",
+    "fullDeck": "全部 78 張牌",
+    "fullDeckDesc": "包含大阿爾克納和小阿爾克納牌，全面探索各種生活面向",
+    "majorDeck": "22 張大阿爾克納牌",
+    "majorDeckDesc": "專注於靈性指引與重大人生課題",
+    "back": "上一步",
+    "next": "下一步",
+    "drawCards": "開始抽牌",
+    "intentGeneral": "我沒有特定問題，只想看看牌怎麼說",
+    "intentLove": "最近感情不順，想釐清原因",
+    "intentCareer": "想聚焦在工作或學習方向",
+    "intentCurious": "我只是好奇，第一次玩塔羅",
+    "oneCard": "一張牌",
+    "oneCardDesc": "直覺閃現，簡單明瞭",
+    "threeCards": "三張牌",
+    "threeCardsDesc": "過去、現在、未來",
+    "sixCards": "六張牌",
+    "sixCardsDesc": "深入探索情境與發展"
   }
 }

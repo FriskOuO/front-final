@@ -1,40 +1,60 @@
-import React from 'react';
-import TarotForm from '../components/TarotForm';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import backgroundImage from '../assets/banners/bg_starry_wood.png';
-import logo from '../assets/icons/logo_mystic_tarot.png'; // 使用原始/垂直版本的 logo
 import './Home.css';
 
 const Home = () => {
   const { t } = useTranslation();
+  const [showContent, setShowContent] = useState(false);
 
-  const containerStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed'
-  };
+  // 先顯示背景動畫，然後再顯示文字內容
+  useEffect(() => {
+    // 進一步減少延遲時間
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 300); // 減少至 300 毫秒，讓文字更快出現
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="home-container" style={containerStyle}>
-      <header>
-        <div className="logo-container">
-          <img src={logo} alt="Mystic Tarot" className="home-logo" />
-        </div>
-        <h1>{t('home.title')}</h1>
-        <p className="subtitle">{t('home.subtitle')}</p>
-      </header>
+    <div className="home-container">
+      <div className="home-background">
+        {/* 星空背景動畫會立即顯示 */}
+        <div className="stars"></div>
+        <div className="shooting-star"></div>
+        <div className="shooting-star delay-1"></div>
+        <div className="shooting-star delay-2"></div>
+        <div className="shooting-star delay-3"></div>
+        <div className="shooting-star delay-4"></div>
+        <div className="shooting-star delay-5"></div>
+        <div className="shooting-star delay-6"></div>
+      </div>
+      <div className="background-overlay"></div>
       
-      <div className="home-content">
-        <div className="intro-text">
+      {/* 使用 showContent 狀態控制文字顯示 */}
+      <div className={`home-content ${showContent ? 'visible' : ''}`}>
+        <h1 className="home-title">
+          {t('home.title')}
+        </h1>
+        
+        <p className="home-subtitle">
+          {t('home.subtitle')}
+        </p>
+        
+        <div className="home-intro">
           <p>{t('home.intro')}</p>
         </div>
         
-        <TarotForm />
+        <div className="home-buttons">
+          <Link to="/intro" className="start-button glow-container">
+            {t('home.startExperience')}
+          </Link>
+        </div>
       </div>
       
-      <footer>
-        <p>{t('home.footer')}</p>
+      <footer className="home-footer">
+        {t('home.footer')}
       </footer>
     </div>
   );

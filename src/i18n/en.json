@@ -5,10 +5,11 @@
     "reversed": "Reversed"
   },
   "home": {
-    "title": "Tarot Card Reading",
-    "subtitle": "Discover insights into your life's journey",
-    "intro": "Welcome to the Tarot Card Reading experience. Tarot cards can provide guidance and insight into your life's questions. Fill out the form below to begin your reading.",
-    "footer": "© 2025 Tarot Reading App"
+    "title": "Mystic Tarot",
+    "subtitle": "Explore the Mysteries of Fate",
+    "intro": "Welcome to the world of Mystic Tarot, where ancient wisdom reveals the hidden truths of your life. Whether you face challenging questions or find yourself at a crossroads, the tarot cards offer profound insights and guidance. Relax your mind, focus your thoughts, and let the tarot decode the mysteries of your destiny.",
+    "startExperience": "Begin Your Journey",
+    "footer": "© 2025 Mystic Tarot | All Rights Reserved"
   },
   "form": {
     "title": "Start Your Reading",
@@ -28,13 +29,14 @@
     "cardCountRequired": "Please select a reading type"
   },
   "draw": {
-    "title": "Drawing Your Cards",
-    "greeting": "Hello, {{name}}",
-    "topic": "We're focusing on: {{topic}}",
-    "instruction": "Drawing {{count}} cards for your reading",
-    "drawing": "Drawing your cards...",
-    "redraw": "Draw Again",
-    "seeResult": "View Your Reading"
+    "title": "Draw Your Tarot Cards",
+    "instruction": "Please select {count} cards from the table",
+    "cardsSelected": "{selected} of {total} cards selected",
+    "greeting": "Hello, {name}",
+    "intentPrompt": "Your question",
+    "shuffling": "Shuffling cards...",
+    "deck": "Tarot Deck",
+    "reset": "Reshuffle Cards"
   },
   "result": {
     "title": "Your Tarot Reading",
@@ -76,5 +78,34 @@
     "minorSwords": "Minor Arcana - Swords",
     "minorPentacles": "Minor Arcana - Pentacles",
     "minorWands": "Minor Arcana - Wands"
+  },
+  "introFlow": {
+    "chooseIntent": "Choose Your Intention",
+    "intentDescription": "Select an option that best matches what you're looking for",
+    "chooseCardCount": "How Many Cards?",
+    "cardCountDescription": "Different spreads provide different levels of insight",
+    "enterName": "Enter Your Name",
+    "nameDescription": "Your name will help attune the energies",
+    "namePlaceholder": "Enter your name (optional)",
+    "nameNote": "Enter your name to resonate with the energy (can be skipped)",
+    "advancedSettings": "Advanced Settings",
+    "deckDescription": "If you wish to explore deep issues or soul journeys, you may choose to use only the Major Arcana",
+    "fullDeck": "Complete Deck (78 Cards)",
+    "fullDeckDesc": "Includes both Major and Minor Arcana for complete life exploration",
+    "majorDeck": "Major Arcana Only (22 Cards)",
+    "majorDeckDesc": "Focus on spiritual guidance and major life lessons",
+    "back": "Back",
+    "next": "Next",
+    "drawCards": "Draw Cards",
+    "intentGeneral": "I don't have a specific question, just checking in",
+    "intentLove": "My love life needs clarity",
+    "intentCareer": "Focus on work or academic direction",
+    "intentCurious": "Just curious, first time with tarot",
+    "oneCard": "One Card",
+    "oneCardDesc": "Intuitive flash, simple clarity",
+    "threeCards": "Three Cards",
+    "threeCardsDesc": "Past, Present, Future",
+    "sixCards": "Six Cards",
+    "sixCardsDesc": "Deep exploration of situation"
   }
 }

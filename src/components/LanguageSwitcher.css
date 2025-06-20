@@ -9,20 +9,23 @@
   border: 1px solid #b8860b;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
   color: #e0e0e0;
   font-size: 14px;
   min-width: 40px;
 }
 
 .language-switcher button:hover {
-  background-color: rgba(184, 134, 11, 0.3);
+  background-color: rgba(184, 134, 11, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 .language-switcher button.active {
   background-color: #b8860b;
   color: white;
   border-color: #daa520;
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
 }
 
 /* 響應式設計 */

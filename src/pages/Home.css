@@ -1,153 +1,278 @@
 .home-container {
-  max-width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 80px 0 0 0; /* 頂部增加導覽列高度的 padding */
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+  align-items: center;
+  color: #f0f0f0;
+  padding: 0;  /* 移除上下邊距，更好地居中 */
 }
 
-/* 暗色覆蓋層 - 調整透明度 */
-.home-container::before {
-  content: '';
+.home-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 60, 1) 0%, rgba(5, 5, 15, 1) 100%);
+  overflow: hidden; /* 確保流星動畫不會溢出 */
+}
+
+/* 創建星星效果 */
+.stars {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  animation: twinkle 100s linear infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* 重新設計流星效果，確保所有流星一開始就有動畫 */
+.shooting-star {
+  position: absolute;
+  width: 150px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 40%, transparent);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+  transform: rotate(-45deg); /* 右上到左下方向 */
+  animation: shootingStar 7s linear infinite;
+  /* 設置初始位置，避免流星一開始就在畫面外 */
+  top: 10%;
+  right: 5%;
+  left: auto;
+  /* 確保流星一開始就在動畫中間位置 */
+  animation-delay: -3s; /* 負值延遲確保動畫立即開始並從中間點開始 */
+}
+
+.shooting-star.delay-1 {
+  width: 120px;
+  top: 15%;
+  right: 30%;
+  animation-duration: 9s; /* 較慢的速度 */
+  animation-delay: -4s; 
+}
+
+.shooting-star.delay-2 {
+  width: 180px;
+  top: 25%;
+  right: 60%;
+  animation-duration: 12s; /* 更慢的速度 */
+  animation-delay: -5s;
+}
+
+.shooting-star.delay-3 {
+  width: 90px;
+  top: 40%;
+  right: 10%;
+  animation-duration: 8s;
+  animation-delay: -2s;
+}
+
+.shooting-star.delay-4 {
+  width: 140px;
+  top: 50%;
+  right: 40%;
+  animation-duration: 10s;
+  animation-delay: -7s;
+}
+
+.shooting-star.delay-5 {
+  width: 110px;
+  top: 70%;
+  right: 15%;
+  animation-duration: 11s;
+  animation-delay: -6s;
+}
+
+.shooting-star.delay-6 {
+  width: 160px;
+  top: 75%;
+  right: 70%;
+  animation-duration: 13s; /* 最慢的速度 */
+  animation-delay: -8s;
+}
+
+/* 統一的流星動畫：從右上到左下，但不會消失後立即重新出現 */
+@keyframes shootingStar {
+  0% {
+    transform: translateX(200px) translateY(-200px) rotate(-45deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(100px) translateY(-100px) rotate(-45deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.8;
+    transform: translateX(-400px) translateY(400px) rotate(-45deg);
+  }
+  100% {
+    transform: translateX(-500px) translateY(500px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.background-overlay {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* 可以調整透明度，數值範圍 0-1 */
-  z-index: 1;
-}
-
-/* 確保所有內容顯示在覆蓋層上方 */
-.home-container > * {
-  position: relative;
-  z-index: 2;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 40px;
-  padding-top: 50px;
-}
-
-header h1 {
-  font-size: 3.5rem;
-  color: #f8d568; /* 金色標題，與圖中的塔羅牌顏色相呼應 */
-  margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  color: #f5f5f5; /* 淺色副標題 */
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  z-index: -1;
 }
 
 .home-content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.intro-text {
-  text-align: center;
   max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.8;
-  color: #f0f0f0;
-  font-size: 1.1rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-/* 表單容器樣式修改 */
-.tarot-form-container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 30px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 215, 0, 0.3); /* 金色邊框 */
-}
-
-/* 表單標題 */
-.tarot-form-container h2 {
-  color: #f8d568;
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+  z-index: 1;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* 表單內的標籤 */
-.form-group label {
-  color: #f0f0f0;
+/* 當 visible 類被添加時，顯示內容 */
+.home-content.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* 輸入框樣式 */
-.form-group input[type="text"] {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid #664d00;
-}
-
-/* 卡片計數選項 */
-.card-count-options label {
-  color: #e0e0e0;
-}
-
-/* 提交按鈕 */
-.tarot-form button[type="submit"] {
-  background-color: #b8860b; /* 暗金色按鈕 */
-  transition: background-color 0.3s;
-}
-
-.tarot-form button[type="submit"]:hover {
-  background-color: #daa520; /* 亮金色 */
-}
-
-footer {
-  margin-top: 60px;
-  text-align: center;
-  color: #aaa;
-  padding: 20px 0;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-/* 在現有 CSS 檔案中添加 */
-
-.logo-container {
-  display: flex;
-  justify-content: center;
+/* 移除所有子元素的 opacity: 0 和單獨的動畫，讓 home-content 控制全部顯示 */
+.home-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #f9d342;
   margin-bottom: 20px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.home-logo {
-  max-width: 250px;
-  height: auto;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); /* 添加金色光暈效果 */
-  animation: float 6s ease-in-out infinite;
+.home-subtitle {
+  font-size: 1.8rem;
+  color: #e0e0e0;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.home-intro {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+}
+
+.home-intro p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.home-buttons {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* 移除不再使用的 fadeIn 動畫 */
+/* @keyframes fadeIn {...} */
+
+.start-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #b8860b, #daa520);
+  color: #0a0a1e;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+  position: relative;
+}
+
+.start-button::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: radial-gradient(circle, rgba(249, 211, 66, 0.4) 0%, transparent 70%);
+  border-radius: 40px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.start-button:hover {
+  background: linear-gradient(135deg, #daa520, #ffd700);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(249, 211, 66, 0.6);
+}
+
+.start-button:hover::after {
+  opacity: 1;
+}
+
+.home-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  text-align: center;
+  opacity: 0.7;
+  font-size: 0.9rem;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
-  .home-logo {
-    max-width: 180px;
+  .home-title {
+    font-size: 3rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .home-intro p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .home-intro {
+    padding: 20px;
+  }
+  
+  .start-button {
+    padding: 12px 30px;
+    font-size: 1rem;
   }
 }

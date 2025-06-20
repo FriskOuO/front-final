@@ -1,0 +1,507 @@
+.tarot-intro-flow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}
+
+/* 步驟指示器 */
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.steps-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 2px;
+  background: rgba(184, 134, 11, 0.3);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.step-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(10, 10, 30, 0.7);
+  border: 2px solid rgba(184, 134, 11, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  background-color: rgba(184, 134, 11, 0.8);
+  border-color: #f9d342;
+  box-shadow: 0 0 15px rgba(249, 211, 66, 0.4);
+}
+
+.step-dot span {
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+/* 主內容區域 */
+.flow-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.step-container {
+  height: 100%;
+  width: 100%;
+}
+
+.step-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #f9d342;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.step-description {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* 步驟1：起心動念選項 */
+.intent-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.intent-card {
+  background: rgba(15, 15, 40, 0.7);
+  border-radius: 12px;
+  padding: 25px;
+  cursor: pointer;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 160px;
+}
+
+.intent-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(249, 211, 66, 0.6);
+}
+
+.intent-card.selected {
+  background: rgba(30, 30, 60, 0.8);
+  border-color: #f9d342;
+  box-shadow: 0 0 20px rgba(249, 211, 66, 0.4);
+}
+
+.intent-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.intent-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* 步驟2：抽牌數量選擇 */
+.card-count-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.count-card {
+  background: rgba(15, 15, 40, 0.7);
+  border-radius: 12px;
+  padding: 25px;
+  width: 250px;
+  cursor: pointer;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.count-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(249, 211, 66, 0.6);
+}
+
+.count-card.selected {
+  background: rgba(30, 30, 60, 0.8);
+  border-color: #f9d342;
+  box-shadow: 0 0 20px rgba(249, 211, 66, 0.4);
+}
+
+.count-card h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #f9d342;
+  margin-bottom: 20px;
+}
+
+.card-illustration {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+  min-height: 80px;
+  align-items: center;
+}
+
+.mini-card {
+  width: 30px;
+  height: 50px;
+  background: linear-gradient(135deg, #b8860b, #daa520);
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.count-card:hover .mini-card {
+  animation: cardHover 1s infinite alternate;
+}
+
+@keyframes cardHover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+.count-card:hover .mini-card:nth-child(2n) {
+  animation-delay: 0.2s;
+}
+
+.count-card:hover .mini-card:nth-child(3n) {
+  animation-delay: 0.4s;
+}
+
+.count-description {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* 步驟3：名字輸入 */
+.name-input-container {
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.name-input-container input {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(10, 10, 30, 0.6);
+  border: 1px solid rgba(184, 134, 11, 0.5);
+  border-radius: 30px;
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.name-input-container input:focus {
+  outline: none;
+  border-color: #f9d342;
+  box-shadow: 0 0 15px rgba(249, 211, 66, 0.3);
+}
+
+.input-note {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+
+/* 進階設定 */
+.advanced-settings {
+  max-width: 600px;
+  margin: 40px auto 0;
+  background: rgba(10, 10, 35, 0.6);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+}
+
+.advanced-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  cursor: pointer;
+  background: rgba(20, 20, 45, 0.7);
+  transition: background 0.3s;
+}
+
+.advanced-toggle:hover {
+  background: rgba(30, 30, 60, 0.7);
+}
+
+.advanced-toggle span {
+  font-size: 1.1rem;
+  color: #daa520;
+}
+
+.toggle-icon {
+  font-size: 0.8rem;
+}
+
+.advanced-content {
+  padding: 20px;
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: auto;
+  }
+}
+
+.advanced-description {
+  margin-top: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.deck-mode-options {
+  padding-bottom: 10px;
+}
+
+.deck-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+}
+
+.deck-option:hover {
+  background: rgba(30, 30, 60, 0.5);
+}
+
+.deck-option.selected {
+  background: rgba(30, 30, 60, 0.8);
+  border-color: rgba(184, 134, 11, 0.5);
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #b8860b;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f9d342;
+  box-shadow: 0 0 5px rgba(249, 211, 66, 0.7);
+}
+
+.deck-info {
+  flex: 1;
+}
+
+.deck-info h4 {
+  margin: 0 0 5px;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.deck-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* 導航按鈕 */
+.flow-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.nav-button:hover {
+  transform: scale(1.05);
+}
+
+.back-button {
+  background: transparent;
+  color: #f0f0f0;
+  border: 1px solid rgba(184, 134, 11, 0.7);
+}
+
+.back-button:hover {
+  background: rgba(184, 134, 11, 0.1);
+}
+
+.next-button {
+  background: linear-gradient(135deg, #b8860b, #daa520);
+  color: #0a0a1e;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+  border: none;
+}
+
+.next-button:hover {
+  background: linear-gradient(135deg, #daa520, #ffd700);
+  box-shadow: 0 4px 20px rgba(249, 211, 66, 0.6);
+}
+
+.next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(184, 134, 11, 0.5);
+  box-shadow: none;
+  transform: none;
+}
+
+/* CSS 動畫 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.delay-0 { animation-delay: 0.1s; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.4s; }
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .intent-options {
+    grid-template-columns: 1fr;
+  }
+
+  .card-count-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .count-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .steps-indicator::before {
+    width: 80%;
+  }
+  
+  .step-dot {
+    margin: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .step-description {
+    font-size: 1rem;
+  }
+  
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .steps-indicator::before {
+    width: 70%;
+  }
+  
+  .step-dot {
+    width: 35px;
+    height: 35px;
+    margin: 0 10px;
+  }
+}
+
+/* 添加發光元素容器樣式 */
+.glow-container {
+  position: relative;
+  z-index: 1;
+  overflow: visible;      /* ✅ 避免 glow 被裁切 */
+  padding: 1rem 2rem;     /* ✅ 給光影一點空間 */
+}
+
+/* 將卡片和按鈕應用發光效果 */
+.intent-card, .count-card, .next-button {
+  position: relative;
+}
+
+.intent-card::after, .count-card::after, .next-button::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 16px;
+  background: transparent;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.intent-card:hover::after, .intent-card.selected::after,
+.count-card:hover::after, .count-card.selected::after {
+  background: radial-gradient(circle at center, rgba(249, 211, 66, 0.2) 0%, transparent 70%);
+  box-shadow: 0 0 15px 5px rgba(249, 211, 66, 0.3);
+}
+
+.next-button:hover::after {
+  background: radial-gradient(circle at center, rgba(249, 211, 66, 0.3) 0%, transparent 70%);
+  box-shadow: 0 0 20px 8px rgba(249, 211, 66, 0.4);
+}

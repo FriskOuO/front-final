@@ -14,33 +14,37 @@
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
   margin-bottom: 20px;
 }
 
 .form-group label {
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
-  color: #555;
+  color: #f0f0f0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .form-group input[type="text"] {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.5); /* 金色邊框 */
+  background-color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
+  transition: all 0.3s;
 }
 
 .form-group input[type="text"]:focus {
   outline: none;
   border-color: #daa520;
-  box-shadow: 0 0 5px rgba(218, 165, 32, 0.5);
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
 }
 
 .card-count-options {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 10px;
   margin-top: 10px;
 }
@@ -50,42 +54,59 @@
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.3);
-  transition: background-color 0.2s;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s;
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  justify-content: center;
 }
 
 .card-count-options label:hover {
   background-color: rgba(184, 134, 11, 0.3);
+  border-color: rgba(255, 215, 0, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-count-options input[type="radio"] {
   margin-right: 5px;
 }
 
+.card-count-options input[type="radio"]:checked + label {
+  background-color: rgba(184, 134, 11, 0.5);
+  border-color: #daa520;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.3);
+}
+
+.tarot-form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #b8860b; /* 暗金色按鈕 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 15px;
+}
+
+.tarot-form button[type="submit"]:hover {
+  background-color: #daa520; /* 亮金色 */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 20px rgba(218, 165, 32, 0.3);
+}
+
 .error-message {
   color: #ff6b6b;
   font-size: 14px;
   margin-top: 5px;
-}
-
-.tarot-form button[type="submit"] {
-  padding: 12px;
-  background-color: #6b5b95;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.tarot-form button[type="submit"]:hover {
-  background-color: #574a79;
-}
-
-.tarot-form button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
