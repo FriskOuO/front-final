@@ -61,6 +61,7 @@
     }
   },
   "navbar": {
+    "home": "Home",
     "tarotGuide": "Tarot Guide"
   },
   "guide": {

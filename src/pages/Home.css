@@ -29,15 +29,91 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; /* 調整為正值，確保在背景之上 */
+  z-index: 1;
   background-image: 
     radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
     radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-  background-size: 550px 550px, 350px 350px, 250px 250px;
-  background-position: 0 0, 40px 60px, 130px 270px;
-  animation: twinkle 100s linear infinite;
-  pointer-events: none; /* 防止干擾互動 */
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.1) 1.5px, transparent 2px);
+  background-size: 
+    550px 550px, 
+    350px 350px, 
+    250px 250px,
+    400px 400px,
+    300px 300px;
+  background-position: 
+    0 0, 
+    40px 60px, 
+    130px 270px,
+    70px 100px,
+    200px 150px;
+  animation: twinkle 120s linear infinite;
+  pointer-events: none;
+}
+
+/* 創建第二層星空，增加更多隨機性 */
+.stars::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(white, rgba(255,255,255,.12) 1px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.08) 1.5px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+  background-size: 
+    380px 380px, 
+    200px 200px,
+    320px 320px;
+  background-position: 
+    20px 30px,
+    150px 50px,
+    90px 210px;
+  animation: twinkle-reverse 100s linear infinite;
+}
+
+/* 創建第三層星空，進一步增加豐富度 */
+.stars::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(white, rgba(255,255,255,.1) 1.5px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.13) 1px, transparent 1.5px),
+    radial-gradient(white, rgba(255,255,255,.08) 2px, transparent 2.5px);
+  background-size: 
+    420px 420px, 
+    270px 270px,
+    340px 340px;
+  background-position: 
+    60px 80px,
+    120px 180px,
+    180px 100px;
+  animation: twinkle 150s linear infinite;
+}
+
+/* 優化閃爍動畫 - 微妙變化 */
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  25% { opacity: 0.8; }
+  50% { opacity: 1; }
+  75% { opacity: 0.9; }
+  100% { opacity: 0.7; }
+}
+
+/* 反向閃爍動畫 - 增加隨機感 */
+@keyframes twinkle-reverse {
+  0% { opacity: 0.9; }
+  25% { opacity: 0.7; }
+  50% { opacity: 0.8; }
+  75% { opacity: 1; }
+  100% { opacity: 0.9; }
 }
 
 /* 流星基本樣式調整 */

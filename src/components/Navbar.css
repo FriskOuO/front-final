@@ -30,7 +30,7 @@
 
 /* Logo 樣式調整 */
 .nav-logo {
-  width: 130px;
+  width: 190px; /* 已設定為 190px，但確保它有效 */
   transition: filter 0.3s ease;
 }
 
@@ -100,7 +100,7 @@
   }
   
   .nav-logo {
-    width: 110px;
+    width: 130px; /* 保持與桌面版相同的大小，除非有特殊需求 */
   }
 }
 
@@ -111,7 +111,7 @@
   }
 
   .nav-logo {
-    width: 90px;
+    width: 130px; /* 保持與桌面版相同的大小，除非有特殊需求 */
   }
   
   .navbar-button {

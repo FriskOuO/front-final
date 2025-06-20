@@ -63,6 +63,7 @@
     }
   },
   "navbar": {
+    "home": "首頁",
     "tarotGuide": "塔羅牌指南"
   },
   "guide": {
