@@ -49,28 +49,31 @@ const TarotGuide = () => {
   // 增強查找詳細描述資料的函數，支援所有類型的牌
   const findCardDescription = (card) => {
     // 根據牌的類型選擇對應的描述資料
+    let description = null;
+    
     if (card.arcana === 'major') {
-      return majorArcanaDescriptions.find(
+      description = majorArcanaDescriptions.find(
         desc => desc.name === card.name.en || desc.zh === card.name.zh
       );
     } else if (card.suit === 'cups') {
-      return cupsDescriptions.find(
+      description = cupsDescriptions.find(
         desc => desc.name === card.name.en || desc.zh === card.name.zh
       );
     } else if (card.suit === 'swords') {
-      return swordsDescriptions.find(
+      description = swordsDescriptions.find(
         desc => desc.name === card.name.en || desc.zh === card.name.zh
       );
     } else if (card.suit === 'pentacles') {
-      return pentaclesDescriptions.find(
+      description = pentaclesDescriptions.find(
         desc => desc.name === card.name.en || desc.zh === card.name.zh.replace('錢幣', '星幣')
       );
     } else if (card.suit === 'wands') {
-      return wandsDescriptions.find(
+      description = wandsDescriptions.find(
         desc => desc.name === card.name.en || desc.zh === card.name.zh
       );
     }
-    return null;
+    
+    return description;
   };
 
   // 處理卡牌點擊事件
@@ -279,8 +282,6 @@ const TarotGuide = () => {
       <div className="card-detail-modal">
         <div className="modal-overlay" onClick={closeDetails}></div>
         <div className={`modal-content ${isReversed ? 'card-reversed' : ''}`}>
-          <button className="modal-close" onClick={closeDetails}>×</button>
-          
           <div className="modal-header">
             <h2>{cardName}</h2>
             <button className="toggle-position-btn" onClick={toggleReversed}>
@@ -304,17 +305,41 @@ const TarotGuide = () => {
                 <div className="detail-sections">
                   <div className="detail-section">
                     <h4>{t('guide.coreMeaning')}</h4>
-                    <p>{isReversed ? cardDetail.reversed.core : cardDetail.upright.core}</p>
+                    <p>
+                      {isReversed 
+                        ? (i18n.language === 'en' && cardDetail.reversed.core_en 
+                           ? cardDetail.reversed.core_en 
+                           : cardDetail.reversed.core)
+                        : (i18n.language === 'en' && cardDetail.upright.core_en 
+                           ? cardDetail.upright.core_en 
+                           : cardDetail.upright.core)}
+                    </p>
                   </div>
                   
                   <div className="detail-section">
                     <h4>{t('guide.context')}</h4>
-                    <p>{isReversed ? cardDetail.reversed.context : cardDetail.upright.context}</p>
+                    <p>
+                      {isReversed 
+                        ? (i18n.language === 'en' && cardDetail.reversed.context_en 
+                           ? cardDetail.reversed.context_en 
+                           : cardDetail.reversed.context)
+                        : (i18n.language === 'en' && cardDetail.upright.context_en 
+                           ? cardDetail.upright.context_en 
+                           : cardDetail.upright.context)}
+                    </p>
                   </div>
                   
                   <div className="detail-section">
                     <h4>{t('guide.advice')}</h4>
-                    <p>{isReversed ? cardDetail.reversed.advice : cardDetail.upright.advice}</p>
+                    <p>
+                      {isReversed 
+                        ? (i18n.language === 'en' && cardDetail.reversed.advice_en 
+                           ? cardDetail.reversed.advice_en 
+                           : cardDetail.reversed.advice)
+                        : (i18n.language === 'en' && cardDetail.upright.advice_en 
+                           ? cardDetail.upright.advice_en 
+                           : cardDetail.upright.advice)}
+                    </p>
                   </div>
                 </div>
               ) : (
