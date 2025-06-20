@@ -73,12 +73,13 @@
     "cups": "Cups",
     "swords": "Swords",
     "pentacles": "Pentacles",
-    "wands": "Wands",
-    "major": "Major Arcana",
-    "minorCups": "Minor Arcana - Cups",
-    "minorSwords": "Minor Arcana - Swords",
-    "minorPentacles": "Minor Arcana - Pentacles",
-    "minorWands": "Minor Arcana - Wands"
+    "upright": "Upright",
+    "reversed": "Reversed",
+    "showUpright": "Show Upright",
+    "showReversed": "Show Reversed",
+    "coreMeaning": "Core Meaning",
+    "context": "Context",
+    "advice": "Advice"
   },
   "introFlow": {
     "chooseIntent": "Choose Your Intention",

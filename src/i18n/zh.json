@@ -74,11 +74,16 @@
     "majorArcana": "大牌陣",
     "cups": "聖杯",
     "swords": "寶劍",
-    "pentacles": "錢幣",
+    "pentacles": "星幣",
     "wands": "權杖",
     "upright": "正位",
     "reversed": "逆位",
-    "noResults": "沒有找到符合的塔羅牌"
+    "noResults": "沒有找到符合的塔羅牌",
+    "showUpright": "顯示正位",
+    "showReversed": "顯示逆位",
+    "coreMeaning": "核心含義",
+    "context": "情境解讀",
+    "advice": "建議參考"
   },
   "introFlow": {
     "chooseIntent": "選擇你的起心動念",
