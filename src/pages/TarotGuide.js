@@ -84,32 +84,32 @@ const TarotGuide = () => {
   const renderCardItem = (card) => {
     console.log("Card image path:", card.image);
     
-    // 轉換圖片路徑
+    // 轉換後的路徑用於調試
     const convertedPath = convertImagePath(card.image);
     console.log("Converted path:", convertedPath);
     
-    // 嘗試使用轉換後的路徑獲取圖片
-    const imageKey = card.image; // 原始路徑作為 tarotImageMap 的鍵
+    // 正確處理圖片路徑，優先使用 tarotImageMap 中的映射
+    let imgSrc = tarotImageMap[card.image];
     
-    // 添加額外的鍵，以支持在不同位置查找圖片
-    const additionalKeys = [
-      // 1. 去掉底線的路徑 (cups_01.jpg -> cups01.jpg)
-      card.image.replace(/_(0\d|1[0-4])/g, '$1'),
-      
-      // 2. 將 pentacles 替換為 pents，同時修改目錄結構
-      card.image.replace('/minor/pentacles/pentacles_', '/minor/pents/pents'),
-      
-      // 3. 嘗試其他可能的路徑格式
-      card.image.replace('pentacles', 'pents').replace(/_(0\d|1[0-4])/g, '$1')
-    ];
-    
-    // 嘗試所有可能的路徑找到圖片
-    let imgSrc = tarotImageMap[imageKey];
+    // 如果找不到圖片，嘗試使用轉換後的路徑格式
     if (!imgSrc) {
-      for (const key of additionalKeys) {
-        if (tarotImageMap[key]) {
-          imgSrc = tarotImageMap[key];
-          break;
+      // 處理錢幣牌路徑
+      if (card.suit === 'pentacles') {
+        const match = card.image.match(/pentacles_(\d+)/);
+        if (match && match[1]) {
+          const number = match[1];
+          const newKey = `/assets/tarot/minor/pents/pents${number}.jpg`;
+          imgSrc = tarotImageMap[newKey];
+        }
+      } 
+      // 處理其他小阿爾卡納牌路徑
+      else if (card.suit) {
+        const suit = card.suit;  // cups, swords, wands
+        const match = card.image.match(/_(\d+)/);
+        if (match && match[1]) {
+          const number = match[1];
+          const newKey = `/assets/tarot/minor/${suit}/${suit}${number}.jpg`;
+          imgSrc = tarotImageMap[newKey];
         }
       }
     }
@@ -118,33 +118,39 @@ const TarotGuide = () => {
       <div key={card.id} className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <img 
-              src={imgSrc || null}
-              alt={i18n.language === 'en' ? card.name.en : card.name.zh}
-              className="card-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                console.error('圖片載入失敗:', card.image);
-                e.target.style.background = '#1c1c2e';
-                e.target.style.height = '100%';
-                e.target.style.display = 'flex';
-                e.target.style.alignItems = 'center';
-                e.target.style.justifyContent = 'center';
-                
-                // 添加一個佔位文字
-                const placeholder = document.createElement('div');
-                placeholder.textContent = i18n.language === 'en' ? card.name.en : card.name.zh;
-                placeholder.style.color = '#daa520';
-                placeholder.style.fontSize = '1rem';
-                placeholder.style.padding = '10px';
-                placeholder.style.textAlign = 'center';
-                e.target.parentNode.appendChild(placeholder);
-              }}
-            />
-            <div className="card-name-overlay">
+            {/* 標題放在上方 */}
+            <div className="card-title-top">
               <h3>{i18n.language === 'en' ? card.name.en : card.name.zh}</h3>
             </div>
+            
+            {/* 圖片容器 */}
+            <div className="card-image-container">
+              <img 
+                src={imgSrc || null}
+                alt={i18n.language === 'en' ? card.name.en : card.name.zh}
+                className="card-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  console.error('圖片載入失敗:', card.image);
+                  e.target.style.background = '#1c1c2e';
+                  e.target.style.height = '100%';
+                  e.target.style.display = 'flex';
+                  e.target.style.alignItems = 'center';
+                  e.target.style.justifyContent = 'center';
+                  
+                  // 添加一個佔位文字
+                  const placeholder = document.createElement('div');
+                  placeholder.textContent = i18n.language === 'en' ? card.name.en : card.name.zh;
+                  placeholder.style.color = '#daa520';
+                  placeholder.style.fontSize = '1rem';
+                  placeholder.style.padding = '10px';
+                  placeholder.style.textAlign = 'center';
+                  e.target.parentNode.appendChild(placeholder);
+                }}
+              />
+            </div>
           </div>
+          
           <div className="flip-card-back">
             <h3 className="card-title">
               {i18n.language === 'en' ? card.name.en : card.name.zh}
@@ -152,16 +158,24 @@ const TarotGuide = () => {
             <div className="card-meanings">
               <div className="meaning-section">
                 <h4>{t('guide.upright')}</h4>
-                <p>{i18n.language === 'en' ? 
-                  card.meanings.upright.en : 
-                  card.meanings.upright.zh}
+                <p>{i18n.language === 'en' 
+                  ? (card.meanings.upright.en.length > 100 
+                     ? card.meanings.upright.en.substring(0, 100) + '...' 
+                     : card.meanings.upright.en)
+                  : (card.meanings.upright.zh.length > 50 
+                     ? card.meanings.upright.zh.substring(0, 50) + '...' 
+                     : card.meanings.upright.zh)}
                 </p>
               </div>
               <div className="meaning-section">
                 <h4>{t('guide.reversed')}</h4>
-                <p>{i18n.language === 'en' ? 
-                  card.meanings.reversed.en : 
-                  card.meanings.reversed.zh}
+                <p>{i18n.language === 'en'
+                  ? (card.meanings.reversed.en.length > 100
+                     ? card.meanings.reversed.en.substring(0, 100) + '...'
+                     : card.meanings.reversed.en)
+                  : (card.meanings.reversed.zh.length > 50
+                     ? card.meanings.reversed.zh.substring(0, 50) + '...'
+                     : card.meanings.reversed.zh)}
                 </p>
               </div>
             </div>
@@ -173,13 +187,9 @@ const TarotGuide = () => {
 
   return (
     <div className="tarot-guide-container">
-      <div className="guide-header">
-        <h1>{t('guide.title')}</h1>
-        <p className="guide-intro">{t('guide.intro')}</p>
-      </div>
-      
-      <div className="guide-filters">
-        <div className="search-bar">
+      <div className="search-filter-container">
+        {/* 搜尋框 */}
+        <div className="search-box">
           <input
             type="text"
             placeholder={t('guide.searchPlaceholder')}
@@ -187,40 +197,41 @@ const TarotGuide = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        
+
+        {/* 過濾按鈕 */}
         <div className="filter-buttons">
-          <button 
-            className={filter === 'all' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
           >
             {t('guide.allCards')}
           </button>
-          <button 
-            className={filter === 'major' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'major' ? 'active' : ''}`}
             onClick={() => setFilter('major')}
           >
             {t('guide.majorArcana')}
           </button>
-          <button 
-            className={filter === 'cups' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'cups' ? 'active' : ''}`}
             onClick={() => setFilter('cups')}
           >
             {t('guide.cups')}
           </button>
-          <button 
-            className={filter === 'swords' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'swords' ? 'active' : ''}`}
             onClick={() => setFilter('swords')}
           >
             {t('guide.swords')}
           </button>
-          <button 
-            className={filter === 'pentacles' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'pentacles' ? 'active' : ''}`}
             onClick={() => setFilter('pentacles')}
           >
             {t('guide.pentacles')}
           </button>
-          <button 
-            className={filter === 'wands' ? 'active' : ''}
+          <button
+            className={`filter-button ${filter === 'wands' ? 'active' : ''}`}
             onClick={() => setFilter('wands')}
           >
             {t('guide.wands')}
@@ -229,6 +240,7 @@ const TarotGuide = () => {
       </div>
       
       {loading ? (
+        // 載入中顯示
         <div className="loading-container">
           <div className="spinner-container">
             <div className="loading-spinner"></div>
@@ -236,6 +248,7 @@ const TarotGuide = () => {
           <p className="loading-text">{t('common.loading')}</p>
         </div>
       ) : (
+        // 其餘卡片展示邏輯保持不變
         <div className="guide-content">
           {/* 大阿爾卡納 */}
           {(filter === 'all' || filter === 'major') && majorArcana.length > 0 && (

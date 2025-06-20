@@ -122,4 +122,12 @@
   .navbar-right {
     gap: 8px;
   }
+  
+  body {
+    padding-top: 50px; /* 等於小螢幕導航欄高度 */
+  }
+}
+
+body {
+  padding-top: 60px; /* 等於導航欄高度 */
 }

@@ -3,30 +3,33 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 垂直居中 */
+  justify-content: center; 
   align-items: center;
   color: #f0f0f0;
-  padding: 0;  /* 移除上下邊距，更好地居中 */
+  padding: 0;
+  overflow: hidden; /* 確保所有內容都在容器內 */
 }
 
+/* 調整背景層級和樣式 */
 .home-background {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -2;
+  z-index: 0; /* 調整為正值，確保可見 */
   background: radial-gradient(ellipse at center, rgba(20, 20, 60, 1) 0%, rgba(5, 5, 15, 1) 100%);
-  overflow: hidden; /* 確保流星動畫不會溢出 */
+  overflow: hidden;
 }
 
-/* 創建星星效果 */
+/* 星星效果，調整層級 */
 .stars {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1; /* 調整為正值，確保在背景之上 */
   background-image: 
     radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
     radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
@@ -34,99 +37,27 @@
   background-size: 550px 550px, 350px 350px, 250px 250px;
   background-position: 0 0, 40px 60px, 130px 270px;
   animation: twinkle 100s linear infinite;
+  pointer-events: none; /* 防止干擾互動 */
 }
 
-@keyframes twinkle {
-  0% { opacity: 0.7; }
-  50% { opacity: 1; }
-  100% { opacity: 0.7; }
-}
-
-/* 重新設計流星效果，確保所有流星一開始就有動畫 */
+/* 流星基本樣式調整 */
 .shooting-star {
   position: absolute;
   width: 150px;
   height: 1px;
   background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 40%, transparent);
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
-  transform: rotate(-45deg); /* 右上到左下方向 */
+  transform: rotate(-45deg);
   animation: shootingStar 7s linear infinite;
-  /* 設置初始位置，避免流星一開始就在畫面外 */
   top: 10%;
   right: 5%;
   left: auto;
-  /* 確保流星一開始就在動畫中間位置 */
-  animation-delay: -3s; /* 負值延遲確保動畫立即開始並從中間點開始 */
+  animation-delay: -3s;
+  z-index: 2; /* 調整為正值，確保在星星之上 */
+  pointer-events: none; /* 防止干擾互動 */
 }
 
-.shooting-star.delay-1 {
-  width: 120px;
-  top: 15%;
-  right: 30%;
-  animation-duration: 9s; /* 較慢的速度 */
-  animation-delay: -4s; 
-}
-
-.shooting-star.delay-2 {
-  width: 180px;
-  top: 25%;
-  right: 60%;
-  animation-duration: 12s; /* 更慢的速度 */
-  animation-delay: -5s;
-}
-
-.shooting-star.delay-3 {
-  width: 90px;
-  top: 40%;
-  right: 10%;
-  animation-duration: 8s;
-  animation-delay: -2s;
-}
-
-.shooting-star.delay-4 {
-  width: 140px;
-  top: 50%;
-  right: 40%;
-  animation-duration: 10s;
-  animation-delay: -7s;
-}
-
-.shooting-star.delay-5 {
-  width: 110px;
-  top: 70%;
-  right: 15%;
-  animation-duration: 11s;
-  animation-delay: -6s;
-}
-
-.shooting-star.delay-6 {
-  width: 160px;
-  top: 75%;
-  right: 70%;
-  animation-duration: 13s; /* 最慢的速度 */
-  animation-delay: -8s;
-}
-
-/* 統一的流星動畫：從右上到左下，但不會消失後立即重新出現 */
-@keyframes shootingStar {
-  0% {
-    transform: translateX(200px) translateY(-200px) rotate(-45deg);
-    opacity: 0;
-  }
-  15% {
-    transform: translateX(100px) translateY(-100px) rotate(-45deg);
-    opacity: 1;
-  }
-  85% {
-    opacity: 0.8;
-    transform: translateX(-400px) translateY(400px) rotate(-45deg);
-  }
-  100% {
-    transform: translateX(-500px) translateY(500px) rotate(-45deg);
-    opacity: 0;
-  }
-}
-
+/* 覆蓋層調整 */
 .background-overlay {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
   position: absolute;
@@ -134,17 +65,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 3; /* 調整為正值，確保在流星之上 */
 }
 
 .home-content {
   max-width: 800px;
   text-align: center;
-  z-index: 1;
+  z-index: 5; /* 確保在所有背景元素之上 */
   padding: 0 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  position: relative; /* 確保 z-index 有效 */
 }
 
 /* 當 visible 類被添加時，顯示內容 */
@@ -241,6 +173,7 @@
   text-align: center;
   opacity: 0.7;
   font-size: 0.9rem;
+  z-index: 5; /* 確保在背景之上 */
 }
 
 /* 響應式設計 */
@@ -275,4 +208,73 @@
     padding: 12px 30px;
     font-size: 1rem;
   }
+}
+
+/* 添加流星動畫定義，保持其他樣式不變 */
+@keyframes shootingStar {
+  0% {
+    transform: translateX(200px) translateY(-200px) rotate(-45deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(100px) translateY(-100px) rotate(-45deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.8;
+    transform: translateX(-400px) translateY(400px) rotate(-45deg);
+  }
+  100% {
+    transform: translateX(-500px) translateY(500px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* 添加延遲流星樣式 */
+.shooting-star.delay-1 {
+  width: 120px;
+  top: 15%;
+  right: 30%;
+  animation-duration: 9s; /* 較慢的速度 */
+  animation-delay: -4s; 
+}
+
+.shooting-star.delay-2 {
+  width: 180px;
+  top: 25%;
+  right: 60%;
+  animation-duration: 12s; /* 更慢的速度 */
+  animation-delay: -5s;
+}
+
+.shooting-star.delay-3 {
+  width: 90px;
+  top: 40%;
+  right: 10%;
+  animation-duration: 8s;
+  animation-delay: -2s;
+}
+
+.shooting-star.delay-4 {
+  width: 140px;
+  top: 50%;
+  right: 40%;
+  animation-duration: 10s;
+  animation-delay: -7s;
+}
+
+.shooting-star.delay-5 {
+  width: 110px;
+  top: 70%;
+  right: 15%;
+  animation-duration: 11s;
+  animation-delay: -6s;
+}
+
+.shooting-star.delay-6 {
+  width: 160px;
+  top: 75%;
+  right: 70%;
+  animation-duration: 13s; /* 最慢的速度 */
+  animation-delay: -8s;
 }
