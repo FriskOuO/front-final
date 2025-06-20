@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Draw from './pages/Draw';
 import Result from './pages/Result';
@@ -7,11 +7,12 @@ import TarotGuide from './pages/TarotGuide';
 import IntroPage from './pages/IntroPage';
 import Navbar from './components/Navbar';
 import './App.css';
+import './i18n/i18n'; // 確保 i18n 配置在應用程式啟動時就被導入
 
 const App = () => {
   return (
     <div className="app">
-      <BrowserRouter>
+      <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -20,7 +21,7 @@ const App = () => {
           <Route path="/result" element={<Result />} />
           <Route path="/tarot-guide" element={<TarotGuide />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };

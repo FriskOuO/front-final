@@ -1,25 +1,28 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import enTranslation from './en.json';
-import zhTranslation from './zh.json';
 
-const resources = {
-  en: {
-    translation: enTranslation
-  },
-  zh: {
-    translation: zhTranslation
-  }
-};
+// 確保正確引入翻譯文件
+import en from './en.json';
+import zh from './zh.json';
 
 i18n
   .use(initReactI18next)
   .init({
-    resources,
-    lng: 'zh', // 預設語言
-    fallbackLng: 'en',
+    resources: {
+      'en': {
+        translation: en
+      },
+      'zh-TW': {
+        translation: zh
+      }
+    },
+    lng: localStorage.getItem('i18nextLng') || 'zh-TW',
+    fallbackLng: 'zh-TW',
     interpolation: {
-      escapeValue: false // 不需要額外轉義
+      escapeValue: false
+    },
+    react: {
+      useSuspense: false
     }
   });
 

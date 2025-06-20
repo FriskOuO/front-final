@@ -42,3 +42,38 @@ code {
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* 或者您的全局樣式文件 */
+
+/* 統一按鈕發光效果 */
+.next-button, .continue-button, button[type="submit"] {
+  background-color: #DAA520;
+  color: #0A0D1E;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
+  position: relative;
+  overflow: visible; /* 確保發光效果不會被截斷 */
+}
+
+.next-button:hover, .continue-button:hover, button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(218, 165, 32, 0.7);
+}
+
+/* 移除任何可能干擾發光效果的樣式 */
+.next-button:after, .continue-button:after, button[type="submit"]:after {
+  content: none;
+}
+
+/* 確保按鈕禁用狀態正確顯示 */
+.next-button:disabled, .continue-button:disabled, button[type="submit"]:disabled {
+  background-color: #7d6318;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}

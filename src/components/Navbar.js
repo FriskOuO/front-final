@@ -23,10 +23,12 @@ const Navbar = () => {
         <div className="navbar-right">
           <div className="navbar-links">
             <Link to="/" className={`navbar-button ${isActive('/')}`}>
-              {t('navbar.home')}
+              {/* 直接使用靜態文字作為備用 */}
+              {t('navbar.home') === 'navbar.home' ? '首頁' : t('navbar.home')}
             </Link>
             <Link to="/tarot-guide" className={`navbar-button ${isActive('/tarot-guide')}`}>
-              {t('navbar.tarotGuide')}
+              {/* 直接使用靜態文字作為備用 */}
+              {t('navbar.tarotGuide') === 'navbar.tarotGuide' ? '塔羅牌指南' : t('navbar.tarotGuide')}
             </Link>
           </div>
           <div className="navbar-language">
