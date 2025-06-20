@@ -1,0 +1,217 @@
+/* 塔羅牌解讀頁面樣式 */
+
+.reading-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #f0e6d2;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.reading-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(218, 165, 32, 0.3);
+  padding-bottom: 15px;
+}
+
+.reading-title {
+  font-size: 2rem;
+  margin: 0;
+  color: #daa520;
+  text-shadow: 0 0 5px rgba(218, 165, 32, 0.5);
+}
+
+/* 卡片佈局容器 */
+.reading-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 卡片展示區域 */
+.cards-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 單一卡片佈局 */
+.spread-1 {
+  justify-content: center;
+  align-items: center;
+}
+
+/* 三卡佈局 */
+.spread-3 {
+  justify-content: space-between;
+}
+
+/* 六卡佈局 */
+.spread-6 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+
+/* 卡片位置容器 */
+.card-position {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-position:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(218, 165, 32, 0.2);
+}
+
+.position-title {
+  color: #daa520;
+  font-size: 1.3rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* 卡片容器 */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .card-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* 卡片樣式 */
+.card {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card.reversed {
+  transform: rotate(180deg);
+}
+
+.card.reversed:hover {
+  transform: rotate(180deg) scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 卡片解讀 */
+.card-interpretation {
+  flex-grow: 1;
+}
+
+.card-name {
+  font-size: 1.4rem;
+  color: #daa520;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(218, 165, 32, 0.3);
+  padding-bottom: 10px;
+}
+
+.card-meaning {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.meaning-section h5 {
+  color: #daa520;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.meaning-section p {
+  margin: 0;
+  line-height: 1.5;
+  color: #f0e6d2;
+}
+
+/* 結論 */
+.reading-conclusion {
+  background-color: rgba(218, 165, 32, 0.1);
+  border-left: 4px solid #daa520;
+  padding: 15px 20px;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+/* 按鈕 */
+.reading-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.action-button {
+  background-color: rgba(218, 165, 32, 0.2);
+  color: #daa520;
+  border: 1px solid #835c2b;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-button:hover {
+  background-color: rgba(218, 165, 32, 0.3);
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+}
+
+.action-button.new-reading {
+  background-color: rgba(218, 165, 32, 0.3);
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .spread-6 {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    max-width: 150px;
+  }
+  
+  .reading-actions {
+    flex-direction: column;
+  }
+}

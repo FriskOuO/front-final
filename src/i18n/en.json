@@ -46,8 +46,7 @@
   },
   "draw": {
     "title": "Select Tarot Cards",
-    "yourQuestion": "Your Question",
-    "selectInstruction": "Please select {count} cards that intuitively attract you",
+    "selectInstruction": "Please select {{count}} cards from the deck",
     "shuffle": "Shuffle",
     "majorArcanaDeck": "Major Arcana Deck",
     "fullTarotDeck": "Full Tarot Deck"

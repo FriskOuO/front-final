@@ -33,10 +33,12 @@
     "cardCountRequired": "請選擇占卜類型"
   },
   "draw": {
-    "title": "抽選塔羅牌",
+    "title": "選擇塔羅牌",
     "yourQuestion": "你的問題",
-    "selectInstruction": "請從牌桌選擇 {count} 張直覺吸引你的牌",
-    "shuffle": "洗牌"
+    "selectInstruction": "請從牌桌選擇 {{count}} 張牌",
+    "shuffle": "重新洗牌",
+    "majorArcanaDeck": "大阿爾卡納牌組",
+    "fullTarotDeck": "完整塔羅牌組"
   },
   "result": {
     "title": "你的塔羅占卜",

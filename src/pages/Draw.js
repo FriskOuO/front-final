@@ -1,59 +1,52 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Draw.css';
 import cardBackImage from '../assets/tarot/back.png';
+import tarotImageMap from '../assets/tarotImageMap';
+import _ from 'lodash';
 
 const Draw = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const deckContainerRef = useRef(null);
   
-  const [selectedCards, setSelectedCards] = useState([]);
-  const [availableCards, setAvailableCards] = useState([...Array(78).keys()]);
-  const [isShuffling, setIsShuffling] = useState(false);
-  const [cardCount, setCardCount] = useState(3); // 預設為3張牌
-  const [intent, setIntent] = useState('');
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [deckType, setDeckType] = useState('full'); // 'full'或'major'，預設為完整牌組
+  // 初始化塔羅牌組
+  const initializeDeck = (deckType) => {
+    const deckLength = deckType === 'major' ? 22 : 78;
+    return Array.from({ length: deckLength }, (_, i) => ({
+      id: i,
+    }));
+  };
   
-  // 取得容器寬度
-  useEffect(() => {
-    const updateWidth = () => {
-      if (deckContainerRef.current) {
-        setContainerWidth(deckContainerRef.current.clientWidth);
-      }
-    };
-    
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    
-    return () => {
-      window.removeEventListener('resize', updateWidth);
-    };
+  // 使用 useMemo 初始化完整牌組
+  const fullDeck = useMemo(() => {
+    return initializeDeck('full');
   }, []);
+  
+  const majorDeck = useMemo(() => {
+    return initializeDeck('major');
+  }, []);
+  
+  const [deck, setDeck] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const [animStage, setAnimStage] = useState(null); // null | 'collapse' | 'expand'
+  const [cardCount, setCardCount] = useState(3);
+  const [intent, setIntent] = useState('');
+  const [deckType, setDeckType] = useState('full');
   
   // 從URL參數或state獲取設置
   useEffect(() => {
-    console.log("Location state:", location.state); // 調試用
-    console.log("URL params:", new URLSearchParams(location.search).toString()); // 調試用
-    
     const params = new URLSearchParams(location.search);
     
     // 獲取牌組類型 (deckType)
     const deckTypeFromParams = params.get('deckType');
     const deckTypeFromState = location.state?.deckType;
     
-    console.log("Deck type from URL:", deckTypeFromParams); // 調試用
-    console.log("Deck type from state:", deckTypeFromState); // 調試用
-    
     if (deckTypeFromParams === 'major' || deckTypeFromState === 'major') {
       setDeckType('major');
-      console.log("Setting deck type to major"); // 調試用
     } else {
       setDeckType('full');
-      console.log("Setting deck type to full"); // 調試用
     }
     
     // 獲取牌數
@@ -75,64 +68,101 @@ const Draw = () => {
     } else if (intentFromState) {
       setIntent(intentFromState);
     }
-    
-    // 初始化時自動洗牌
-    // 將handleShuffle的調用移到下方，確保先設置好deckType
   }, [location.search, location.state]);
   
-  // 監聽deckType變化，當它改變時洗牌
+  // 監聽deckType變化，當它改變時初始化牌組
   useEffect(() => {
-    handleShuffle();
-  }, [deckType]);
+    setDeck(deckType === 'major' ? [...majorDeck] : [...fullDeck]);
+  }, [deckType, fullDeck, majorDeck]);
   
-  // 洗牌功能 - 根據牌組類型洗不同數量的牌
-  const handleShuffle = () => {
-    setIsShuffling(true);
+  // 洗牌功能 - 使用收合再展開的動畫
+  const shuffleDeck = () => {
+    if (animStage) return; // 動畫進行中不允許再次洗牌
     
-    // 重置已選擇的牌
-    setSelectedCards([]);
-    
-    // 決定牌組的長度
-    const deckLength = deckType === 'major' ? 22 : 78;
-    console.log("Shuffling with deck length:", deckLength); // 調試用
-    
-    // 創建一個新的洗牌數組
-    const newDeck = [...Array(deckLength).keys()];
-    
-    // Fisher-Yates 洗牌算法
-    for (let i = newDeck.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newDeck[i], newDeck[j]] = [newDeck[j], newDeck[i]];
-    }
+    setAnimStage('collapse');
+    setSelected([]); // 重置已選牌
     
     setTimeout(() => {
-      setAvailableCards(newDeck);
-      setIsShuffling(false);
-    }, 1000);
+      // 0.5秒後真正洗牌
+      const baseDeck = deckType === 'major' ? majorDeck : fullDeck;
+      setDeck(_.shuffle([...baseDeck]));
+      
+      // 切換到展開動畫
+      setAnimStage('expand');
+      
+      // 展開動畫完成後清除動畫狀態
+      setTimeout(() => {
+        setAnimStage(null);
+      }, 600);
+    }, 500);
   };
   
-  // 處理卡片選擇
-  const handleCardSelect = (cardIndex, row = 1) => {
-    if (selectedCards.length >= cardCount || isShuffling) return;
+  // 選牌功能 - 修改為不跳動的版本
+  const handlePick = (idx) => {
+    if (selected.length >= cardCount || animStage) return;
     
-    let actualIndex = cardIndex;
-    // 大阿爾卡納牌組索引直接使用，完整牌組需要計算行
-    if (deckType === 'full' && row === 2) {
-      actualIndex = cardIndex + 39;
+    // 獲取選中的牌並決定正逆位
+    const picked = { 
+      ...deck[idx], 
+      reversed: Math.random() < 0.5 
+    };
+    
+    // 添加到已選牌組
+    setSelected(prev => [...prev, picked]);
+    
+    // 從原牌組中標記為空位，不刪除而是保留位置
+    // 注意：我們使用 'placeholder' 而不是 'empty' 來區分
+    setDeck(prev => prev.map((card, i) => 
+      i === idx ? { placeholder: true, id: `placeholder-${idx}` } : card
+    ));
+  };
+  
+  // 獲取卡牌正面圖片
+  const getCardFace = (card) => {
+    if (deckType === 'major' || card.id < 22) {
+      // 大阿爾卡納牌
+      const formattedId = card.id.toString().padStart(2, '0');
+      const cardName = getMajorArcanName(card.id);
+      return `/assets/tarot/major/rws_tarot_${formattedId}_${cardName}.jpg`;
+    } else {
+      // 小阿爾卡納牌
+      const { suit, number } = getMinorArcanaDetails(card.id);
+      return `/assets/tarot/minor/${suit}/${suit}${number.toString().padStart(2, '0')}.jpg`;
     }
+  };
+  
+  // 輔助函數：獲取大阿爾卡納牌的名稱
+  const getMajorArcanName = (id) => {
+    const names = [
+      'fool', 'magician', 'high_priestess', 'empress', 'emperor', 
+      'hierophant', 'lovers', 'chariot', 'strength', 'hermit',
+      'wheel_of_fortune', 'justice', 'hanged_man', 'death', 'temperance',
+      'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'world'
+    ];
+    return names[id];
+  };
+  
+  // 輔助函數：根據 ID 計算小阿爾卡納牌的類型和數字
+  const getMinorArcanaDetails = (id) => {
+    // 減去22因為前面是大阿爾卡納牌
+    const minorId = id - 22;
+    const suits = ['cups', 'pents', 'swords', 'wands'];
+    const suitIndex = Math.floor(minorId / 14); // 每種花色14張牌
+    const numberInSuit = (minorId % 14) + 1; // 從1開始計數
     
-    const cardId = availableCards[actualIndex];
-    
-    // 添加選擇的牌
-    setSelectedCards(prev => [...prev, cardId]);
+    return { 
+      suit: suits[suitIndex], 
+      number: numberInSuit 
+    };
   };
   
   // 進入閱讀頁面
   const handleComplete = () => {
-    if (selectedCards.length === cardCount) {
+    if (selected.length === cardCount) {
       navigate('/reading', { 
         state: { 
-          selectedCards: selectedCards,
+          selectedCards: selected.map(card => card.id),
+          drawnCards: selected,
           intent,
           cardCount,
           deckType
@@ -141,127 +171,7 @@ const Draw = () => {
     }
   };
   
-  // 渲染塔羅牌組，根據deckType判斷顯示一排還是兩排
-  const renderTarotDeck = () => {
-    const sideMargin = 40;
-    const cardWidth = 100;
-    
-    if (deckType === 'major') {
-      // 只顯示一排大阿爾卡納牌 (22張)
-      const cardsPerRow = 22;
-      const availableWidth = containerWidth - (sideMargin * 2);
-      const visibleWidth = (availableWidth - cardWidth) / (cardsPerRow - 1);
-      const startX = sideMargin;
-      
-      return (
-        <div className="tarot-deck-display major-arcana">
-          <div className="tarot-deck-row major-arcana-row">
-            {Array.from({ length: cardsPerRow }).map((_, index) => {
-              const leftPosition = startX + (index * visibleWidth);
-              
-              return (
-                <div 
-                  key={`card-major-${index}`} 
-                  className={`tarot-card ${isShuffling ? 'shuffling' : ''} ${selectedCards.includes(availableCards[index]) ? 'selected' : ''}`}
-                  style={{
-                    left: `${leftPosition}px`,
-                    backgroundImage: `url(${cardBackImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    zIndex: index
-                  }}
-                  onClick={() => !isShuffling && handleCardSelect(index)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      );
-    } else {
-      // 顯示兩排完整塔羅牌 (78張)
-      const cardsPerRow = 39;
-      const availableWidth = containerWidth - (sideMargin * 2);
-      const visibleWidth = (availableWidth - cardWidth) / (cardsPerRow - 1);
-      const startX = sideMargin;
-      
-      return (
-        <div className="tarot-deck-overlapping-display">
-          {/* 第一排卡片 - 39張 */}
-          <div className="tarot-deck-row">
-            {Array.from({ length: cardsPerRow }).map((_, index) => {
-              const leftPosition = startX + (index * visibleWidth);
-              
-              return (
-                <div 
-                  key={`card-row1-${index}`} 
-                  className={`tarot-card ${isShuffling ? 'shuffling' : ''} ${selectedCards.includes(availableCards[index]) ? 'selected' : ''}`}
-                  style={{
-                    left: `${leftPosition}px`,
-                    backgroundImage: `url(${cardBackImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    zIndex: index
-                  }}
-                  onClick={() => !isShuffling && handleCardSelect(index, 1)}
-                />
-              );
-            })}
-          </div>
-          
-          {/* 第二排卡片 - 39張 */}
-          <div className="tarot-deck-row second-row">
-            {Array.from({ length: cardsPerRow }).map((_, index) => {
-              const leftPosition = startX + (index * visibleWidth);
-              
-              return (
-                <div 
-                  key={`card-row2-${index}`} 
-                  className={`tarot-card ${isShuffling ? 'shuffling' : ''} ${selectedCards.includes(availableCards[index + cardsPerRow]) ? 'selected' : ''}`}
-                  style={{
-                    left: `${leftPosition}px`,
-                    backgroundImage: `url(${cardBackImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    zIndex: index
-                  }}
-                  onClick={() => !isShuffling && handleCardSelect(index, 2)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-  };
-  
-  // 渲染根據選擇的牌數量動態生成的槽位
-  const renderCardSlots = () => {
-    return (
-      <div className="card-slots">
-        {Array.from({ length: cardCount }).map((_, index) => (
-          <div 
-            key={`slot-${index}`} 
-            className={`card-slot ${index < selectedCards.length ? 'filled' : ''}`}
-          >
-            {index < selectedCards.length ? (
-              <div 
-                className="selected-card"
-                style={{
-                  backgroundImage: `url(${cardBackImage})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              />
-            ) : (
-              <div className="empty-slot"></div>
-            )}
-          </div>
-        ))}
-      </div>
-    );
-  };
-  
-  // 添加處理返回上一頁的函數
+  // 返回上一頁
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -274,47 +184,99 @@ const Draw = () => {
           {t('draw.selectInstruction', { count: cardCount })}
         </p>
         
-        {/* 顯示當前牌組類型 */}
         <div className="deck-type-indicator">
           {deckType === 'major' ? t('draw.majorArcanaDeck') : t('draw.fullTarotDeck')}
         </div>
       </div>
       
-      <div className={`drawing-area ${deckType === 'major' ? 'major-arcana-layout' : ''}`}>
-        {/* 塔羅牌組 */}
-        <div className="deck-container" ref={deckContainerRef}>
-          {renderTarotDeck()}
+      <div className="drawing-area">
+        <div className={`deck-container ${animStage || ''}`}>
+          {/* 第一行卡片 - 約一半的牌組 */}
+          <div className="card-row">
+            {deck.slice(0, Math.ceil(deck.length / 2)).map((card, i) => (
+              <div key={card.id || `slot-${i}`} className="card-slot">
+                {card.placeholder ? (
+                  <div className="card-placeholder"></div>
+                ) : (
+                  <img
+                    src={cardBackImage}
+                    className="tarot-card"
+                    style={{ '--idx': i }}
+                    onClick={() => handlePick(i)}
+                    alt="Tarot Card Back"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+          
+          {/* 第二行卡片 - 剩餘一半的牌組 */}
+          <div className="card-row">
+            {deck.slice(Math.ceil(deck.length / 2)).map((card, i) => {
+              // 計算實際索引，因為是第二行
+              const actualIndex = i + Math.ceil(deck.length / 2);
+              return (
+                <div key={card.id || `slot-${actualIndex}`} className="card-slot">
+                  {card.placeholder ? (
+                    <div className="card-placeholder"></div>
+                  ) : (
+                    <img
+                      src={cardBackImage}
+                      className="tarot-card"
+                      style={{ '--idx': i }} // 使用相對於行的索引
+                      onClick={() => handlePick(actualIndex)} // 但使用絕對索引進行選牌
+                      alt="Tarot Card Back"
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
         
-        {/* 底部選牌區域 */}
-        <div className="selection-area">
-          {renderCardSlots()}
+        <div className="selected-bar">
+          {selected.map((card, i) => (
+            <img
+              key={`selected-${i}`}
+              src={tarotImageMap[getCardFace(card)] || cardBackImage}
+              className={`face ${card.reversed ? 'rev' : ''}`}
+              alt={`Selected Card ${i+1}`}
+            />
+          ))}
+          
+          {/* 空位顯示 */}
+          {selected.length < cardCount && (
+            Array(cardCount - selected.length)
+              .fill(0)
+              .map((_, i) => (
+                <div key={`empty-selected-${i}`} className="selected-empty-slot">
+                  <span>?</span>
+                </div>
+              ))
+          )}
         </div>
       </div>
       
-      {/* 底部按鈕 */}
       <div className="draw-navigation">
-        {/* 上一步按鈕 */}
         <button 
           className="back-button" 
           onClick={handleGoBack}
+          disabled={animStage !== null}
         >
           {t('common.back')}
         </button>
         
-        {/* 洗牌按鈕 */}
         <button 
-          className={`shuffle-button ${isShuffling ? 'shuffling-animation' : ''}`} 
-          onClick={handleShuffle}
-          disabled={isShuffling}
+          className="shuffle-button" 
+          onClick={shuffleDeck}
+          disabled={animStage !== null}
         >
           {t('draw.shuffle')}
         </button>
         
-        {/* 下一步按鈕 */}
         <button 
-          className="continue-button" 
-          disabled={selectedCards.length !== cardCount}
+          className={`continue-button ${selected.length === cardCount ? 'active' : ''}`}
+          disabled={selected.length !== cardCount || animStage !== null}
           onClick={handleComplete}
         >
           {t('common.next')}
