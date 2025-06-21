@@ -38,11 +38,11 @@ const Reading = () => {
   
   // 獲取卡片的描述資料
   const getCardDescription = (card) => {
-    console.log("尋找卡片:", card.id, card.reversed);
+    console.log("嘗試獲取卡片描述:", card.id, card.reversed);
     
     // 處理大阿爾卡納牌 (0-21)
     if (card.id < 22) {
-      // 大阿爾卡納名稱對應
+      // 大阿爾卡納的處理邏輯保持不變
       const majorNames = [
         "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", 
         "The Hierophant", "The Lovers", "The Chariot", "Strength", "The Hermit",
@@ -51,30 +51,12 @@ const Reading = () => {
         "Judgement", "The World"
       ];
       
-      const cardName = majorNames[card.id];
-      console.log("尋找大阿爾卡納:", cardName);
-      
-      // 嘗試在 majorArcanaDescriptions 中找到對應卡片
-      return majorArcanaDescriptions.find(desc => desc.name === cardName);
+      return majorArcanaDescriptions.find(desc => desc.name === majorNames[card.id]);
     } 
     // 處理小阿爾卡納牌
     else {
-      // 根據ID計算花色和數字
       const { suit, number } = getMinorArcanaDetails(card.id);
-      console.log("尋找小阿爾卡納:", suit, number);
-      
-      // 特別處理 - 星幣皇后 (ID 35, suit=pents, number=13)
-      if (suit === 'pents' && number === 13) {
-        console.log("特別處理星幣皇后");
-        // 手動在 pentaclesDescriptions 中查找「星幣皇后」
-        const queenOfPents = pentaclesDescriptions.find(d => 
-          d.name === "Queen of Pentacles" || d.zh === "星幣皇后"
-        );
-        if (queenOfPents) {
-          console.log("找到星幣皇后:", queenOfPents);
-          return queenOfPents;
-        }
-      }
+      console.log(`處理小阿爾卡納: ID=${card.id}, 花色=${suit}, 數字=${number}`);
       
       // 選擇正確的描述資料集
       let descriptions;
@@ -82,8 +64,7 @@ const Reading = () => {
         case 'cups': 
           descriptions = cupsDescriptions;
           break;
-        case 'pentacles':
-        case 'pents':
+        case 'pents': // 確保只使用 'pents'
           descriptions = pentaclesDescriptions;
           break;
         case 'swords':
@@ -93,71 +74,73 @@ const Reading = () => {
           descriptions = wandsDescriptions;
           break;
         default:
+          console.error("未知的花色:", suit);
           return null;
       }
-      
+
       // 構建可能的卡片名稱格式
-      const possibleNames = [];
+      let nameToFind = "";
+      switch(number) {
+        case 1: nameToFind = "Ace of Pentacles"; break;
+        case 2: nameToFind = "Two of Pentacles"; break;
+        case 3: nameToFind = "Three of Pentacles"; break;
+        case 4: nameToFind = "Four of Pentacles"; break;
+        case 5: nameToFind = "Five of Pentacles"; break;
+        case 6: nameToFind = "Six of Pentacles"; break;
+        case 7: nameToFind = "Seven of Pentacles"; break;
+        case 8: nameToFind = "Eight of Pentacles"; break;
+        case 9: nameToFind = "Nine of Pentacles"; break;
+        case 10: nameToFind = "Ten of Pentacles"; break;
+        case 11: nameToFind = "Page of Pentacles"; break;
+        case 12: nameToFind = "Knight of Pentacles"; break;
+        case 13: nameToFind = "Queen of Pentacles"; break;
+        case 14: nameToFind = "King of Pentacles"; break;
+        default: nameToFind = `${number} of Pentacles`;
+      }
       
-      // Ace、Page、Knight、Queen、King格式
-      if (number === 1) {
-        possibleNames.push(`Ace of ${capitalize(suit)}`);
-      } else if (number === 11) {
-        possibleNames.push(`Page of ${capitalize(suit)}`);
-      } else if (number === 12) {
-        possibleNames.push(`Knight of ${capitalize(suit)}`);
-      } else if (number === 13) {
-        possibleNames.push(`Queen of ${capitalize(suit)}`);
-      } else if (number === 14) {
-        possibleNames.push(`King of ${capitalize(suit)}`);
+      // 對於其他花色，替換名稱中的 "Pentacles"
+      if (suit !== 'pents') {
+        const suitName = getSuitDisplayName(suit);
+        nameToFind = nameToFind.replace("Pentacles", suitName);
+      }
+      
+      console.log(`尋找卡片名稱: "${nameToFind}"`);
+      console.log(`可用的名稱:`, descriptions.map(d => d.name));
+      
+      // 嘗試直接匹配英文名稱
+      let found = descriptions.find(desc => desc.name === nameToFind);
+      if (found) {
+        console.log(`找到卡片描述: ${found.name}`);
+        return found;
+      }
+      
+      // 如果找不到，嘗試中文名稱匹配
+      // 構建中文名稱
+      const suitCh = suit === 'cups' ? '聖杯' : 
+                   suit === 'pents' ? '星幣' : 
+                   suit === 'swords' ? '寶劍' : 
+                   suit === 'wands' ? '權杖' : '';
+      
+      let zhName;
+      if (number <= 10) {
+        zhName = `${suitCh}${number}`;
       } else {
-        // 數字牌
-        possibleNames.push(`${number} of ${capitalize(suit)}`);
-        // 英文數字名稱 (Two, Three等)
-        const numberWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
-        if (number <= 10) {
-          possibleNames.push(`${numberWords[number]} of ${capitalize(suit)}`);
-        }
+        const rankCh = number === 11 ? '侍者' : 
+                     number === 12 ? '騎士' : 
+                     number === 13 ? '皇后' : '國王';
+        zhName = `${suitCh}${rankCh}`;
       }
       
-      // 嘗試debug卡片名稱查找
-      console.log("可能的卡片名稱:", possibleNames);
-      console.log("資料庫中的名稱:", descriptions.map(d => d.name));
+      console.log(`尋找中文名稱: "${zhName}"`);
       
-      // 在描述資料中查找匹配的卡片
-      for (const name of possibleNames) {
-        const found = descriptions.find(desc => desc.name === name);
-        if (found) {
-          console.log("找到卡片:", found.name);
-          return found;
-        }
+      found = descriptions.find(desc => desc.zh === zhName);
+      if (found) {
+        console.log(`通過中文名稱找到卡片描述: ${found.zh}`);
+        return found;
       }
       
-      // 查找過程中添加模糊匹配（忽略大小寫）
-      for (const name of possibleNames) {
-        const found = descriptions.find(desc => 
-          desc.name.toLowerCase() === name.toLowerCase() ||
-          desc.name.toLowerCase().includes(name.toLowerCase())
-        );
-        if (found) {
-          console.log("模糊匹配找到卡片:", found.name);
-          return found;
-        }
-      }
-      
-      // 如果找不到卡片，再嘗試中文名稱匹配
-      const suitChinese = {
-        'cups': '聖杯',
-        'pentacles': '星幣',  // 從「星幣」改為「星幣」（已一致，不需更改）
-        'pents': '星幣',      // 從「星幣」改為「星幣」（已一致，不需更改）
-        'swords': '寶劍',
-        'wands': '權杖'
-      };
-      
-      const chineseName = `${suitChinese[suit]}${number}`;
-      console.log("嘗試中文名稱:", chineseName);
-      
-      return descriptions.find(desc => desc.zh === chineseName);
+      console.warn(`無法找到卡片描述: ID=${card.id}, 名稱=${nameToFind}, 中文=${zhName}`);
+      return null;
     }
   };
   
@@ -194,8 +177,7 @@ const Reading = () => {
   const getSuitDisplayName = (suit) => {
     switch(suit.toLowerCase()) {
       case 'cups': return "Cups";
-      case 'pents':
-      case 'pentacles': return "Pentacles";
+      case 'pents': return "Pentacles"; // 所有 'pents' 顯示為 "Pentacles"
       case 'swords': return "Swords";
       case 'wands': return "Wands";
       default: return suit.charAt(0).toUpperCase() + suit.slice(1);
@@ -218,9 +200,11 @@ const Reading = () => {
   const getMinorArcanaDetails = (id) => {
     // 減去22因為前面是22張大阿爾卡納牌
     const minorId = id - 22;
-    const suits = ['cups', 'pentacles', 'swords', 'wands'];
+    const suits = ['cups', 'pents', 'swords', 'wands']; // 確保直接使用 'pents'
     const suitIndex = Math.floor(minorId / 14); // 每種花色14張牌
     const number = (minorId % 14) + 1; // 牌面數值 (1-14)
+    
+    console.log(`卡片ID ${id} 轉換: minorId=${minorId}, suitIndex=${suitIndex}, number=${number}`);
     
     return { 
       suit: suits[suitIndex], 
@@ -287,71 +271,32 @@ const Reading = () => {
   
   // 改進獲取卡片含義的函數
   const getCardMeaning = (card, type) => {
-    try {
-      // 先嘗試常規方式獲取描述
-      const description = getCardDescription(card);
-      if (!description) {
-        console.log(`找不到卡片 ${card.id} 的描述`);
-        
-        // 添加卡片ID和名稱的調試信息
-        if (card.id < 22) {
-          console.log(`這是大阿爾卡納牌 ID: ${card.id}`);
-        } else {
-          const { suit, number } = getMinorArcanaDetails(card.id);
-          console.log(`這是小阿爾卡納牌 花色: ${suit}, 數字: ${number}`);
-        }
-        return null;
-      }
-      
-      const position = card.reversed ? 'reversed' : 'upright';
-      const langSuffix = i18n.language === 'en' ? '_en' : '';
-      
-      // 嘗試獲取對應位置和語言的文本
-      let text;
-      
-      // 1. 首先嘗試：description[position][type + langSuffix]
-      if (description[position] && description[position][type + langSuffix]) {
-        text = description[position][type + langSuffix];
-      }
-      // 2. 如果沒有語言後綴版本，嘗試獲取基本版本
-      else if (description[position] && description[position][type]) {
-        text = description[position][type];
-      }
-      // 3. 對於逆位卡，如果缺少逆位解釋，則使用正位解釋
-      else if (card.reversed && description.upright) {
-        if (description.upright[type + langSuffix]) {
-          text = `(使用正位解釋) ${description.upright[type + langSuffix]}`;
-        } else if (description.upright[type]) {
-          text = `(使用正位解釋) ${description.upright[type]}`;
-        }
-      }
-      
-      // 4. 查找替代欄位，例如 'meaning' 代替 'core'
-      if (!text && type === 'core' && description[position]) {
-        if (description[position].meaning) {
-          text = description[position].meaning;
-        } else if (description[position].meaning_en && i18n.language === 'en') {
-          text = description[position].meaning_en;
-        }
-      }
-      
-      // 5. 嘗試 tarotCards 格式 (使用 meanings 屬性)
-      if (!text && description.meanings) {
-        if (card.reversed && description.meanings.reversed) {
-          text = i18n.language === 'en' ? description.meanings.reversed.en : description.meanings.reversed.zh;
-        } else if (description.meanings.upright) {
-          text = i18n.language === 'en' ? description.meanings.upright.en : description.meanings.upright.zh;
-        }
-      }
-      
-      // 添加調試信息
-      console.log(`卡片 ${card.id} ${type} 內容:`, text);
-      
-      return text;
-    } catch (error) {
-      console.error(`獲取卡片 ${card.id} ${type} 時出錯:`, error);
+    const description = getCardDescription(card);
+    if (!description) {
+      console.warn(`找不到卡片 ID=${card.id} 的描述資料`);
       return null;
     }
+    
+    console.log(`獲取卡片含義: ID=${card.id}, 類型=${type}, 卡片名稱=${description.name || description.zh}`);
+    console.log('卡片描述資料:', JSON.stringify(description, null, 2));
+    
+    const position = card.reversed ? 'reversed' : 'upright';
+    
+    // 確保該位置有資料
+    if (!description[position]) {
+      console.warn(`卡片 ${description.name || description.zh} 缺少 ${position} 位置的資料`);
+      return null;
+    }
+    
+    // 獲取指定類型的資料
+    const text = description[position][type];
+    
+    if (!text) {
+      console.warn(`卡片 ${description.name || description.zh} 的 ${position}.${type} 資料缺失`);
+      return null;
+    }
+    
+    return text;
   };
   
   // 獲取卡片名稱（多語言支持）
@@ -391,8 +336,7 @@ const Reading = () => {
   const getMinorArcanaChineseName = (suit, number) => {
     const suitNames = {
       'cups': '聖杯',
-      'pentacles': '星幣',  // 從「錢幣」改為「星幣」
-      'pents': '星幣',      // 從「錢幣」改為「星幣」
+      'pents': '星幣',      // 只保留 'pents' 這一種
       'swords': '寶劍',
       'wands': '權杖'
     };
@@ -475,7 +419,7 @@ const Reading = () => {
               const { suit, number } = getMinorArcanaDetails(card.id);
               const suitNames = {
                 'cups': { en: 'Cups', zh: '聖杯' },
-                'pentacles': { en: 'Pentacles', zh: '星幣' },
+                'pents': { en: 'Pentacles', zh: '星幣' }, // 只保留 'pents' 這一種
                 'swords': { en: 'Swords', zh: '寶劍' },
                 'wands': { en: 'Wands', zh: '權杖' }
               };

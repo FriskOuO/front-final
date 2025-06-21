@@ -285,7 +285,7 @@ const TarotGuide = () => {
           <div className="modal-header">
             <h2>{cardName}</h2>
             <button className="toggle-position-btn" onClick={toggleReversed}>
-              {isReversed ? t('guide.showUpright') : t('guide.showReversed')}
+              {isReversed ? t('tarotGuide.showUpright') : t('tarotGuide.showReversed')}
             </button>
           </div>
           
@@ -299,12 +299,12 @@ const TarotGuide = () => {
             </div>
             
             <div className="modal-description">
-              <h3>{isReversed ? t('guide.reversed') : t('guide.upright')}</h3>
+              <h3>{isReversed ? t('tarotGuide.reversed') : t('tarotGuide.upright')}</h3>
               
               {cardDetail ? (
                 <div className="detail-sections">
                   <div className="detail-section">
-                    <h4>{t('guide.coreMeaning')}</h4>
+                    <h4>{t('tarotGuide.coreMeaning')}</h4>
                     <p>
                       {isReversed 
                         ? (i18n.language === 'en' && cardDetail.reversed.core_en 
@@ -317,7 +317,7 @@ const TarotGuide = () => {
                   </div>
                   
                   <div className="detail-section">
-                    <h4>{t('guide.context')}</h4>
+                    <h4>{t('tarotGuide.contextReading')}</h4>
                     <p>
                       {isReversed 
                         ? (i18n.language === 'en' && cardDetail.reversed.context_en 
@@ -330,7 +330,7 @@ const TarotGuide = () => {
                   </div>
                   
                   <div className="detail-section">
-                    <h4>{t('guide.advice')}</h4>
+                    <h4>{t('tarotGuide.advice')}</h4>
                     <p>
                       {isReversed 
                         ? (i18n.language === 'en' && cardDetail.reversed.advice_en 

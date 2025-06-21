@@ -118,5 +118,21 @@
     "returnHome": "Return Home",
     "missingData": "This card is missing core meaning interpretation",
     "missingAdviceData": "This card is missing advice interpretation"
+  },
+  "tarotGuide": {
+    "title": "Tarot Guide",
+    "search": "Search cards...",
+    "major": "Major Arcana",
+    "cups": "Cups",
+    "pentacles": "Pentacles",
+    "swords": "Swords",
+    "wands": "Wands",
+    "coreMeaning": "Core Meaning",
+    "contextReading": "Context Reading",
+    "advice": "Advice",
+    "upright": "Upright",
+    "reversed": "Reversed",
+    "showUpright": "Show Upright",
+    "showReversed": "Show Reversed"
   }
 }

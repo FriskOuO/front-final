@@ -154,5 +154,21 @@
     "returnHome": "返回首頁",
     "missingData": "此牌卡缺少核心含義解釋資料",
     "missingAdviceData": "此牌卡缺少建議解釋資料"
+  },
+  "tarotGuide": {
+    "title": "塔羅指南",
+    "search": "搜尋卡牌...",
+    "major": "大阿爾卡納",
+    "cups": "聖杯",
+    "pentacles": "星幣",
+    "swords": "寶劍",
+    "wands": "權杖",
+    "coreMeaning": "核心含義",
+    "contextReading": "情境解讀",
+    "advice": "建議",
+    "upright": "正位",
+    "reversed": "逆位",
+    "showUpright": "顯示正位",
+    "showReversed": "顯示逆位"
   }
 }
