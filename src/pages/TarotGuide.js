@@ -221,7 +221,7 @@ const TarotGuide = () => {
             </h3>
             <div className="card-meanings">
               <div className="meaning-section">
-                <h4>{t('guide.upright')}</h4>
+                <h4>{i18n.language === 'en' ? 'Upright' : '正位'}</h4>
                 <p>{i18n.language === 'en' 
                   ? (card.meanings.upright.en.length > 100 
                      ? card.meanings.upright.en.substring(0, 100) + '...' 
@@ -232,7 +232,7 @@ const TarotGuide = () => {
                 </p>
               </div>
               <div className="meaning-section">
-                <h4>{t('guide.reversed')}</h4>
+                <h4>{i18n.language === 'en' ? 'Reversed' : '逆位'}</h4>
                 <p>{i18n.language === 'en'
                   ? (card.meanings.reversed.en.length > 100
                      ? card.meanings.reversed.en.substring(0, 100) + '...'
