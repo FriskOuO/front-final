@@ -364,6 +364,12 @@ const TarotGuide = () => {
 
   return (
     <div className="tarot-guide-container">
+      {/* 添加神秘符文元素 */}
+      <div className="mystic-symbol symbol-1"></div>
+      <div className="mystic-symbol symbol-2"></div>
+      <div className="mystic-symbol symbol-3"></div>
+      
+      {/* 原有內容 */}
       <div className="search-filter-container">
         {/* 搜尋框 */}
         <div className="search-box">

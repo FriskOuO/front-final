@@ -2,11 +2,102 @@
 .tarot-guide-container {
   width: 100%;
   max-width: 100%;
-  padding: 80px 0 40px 0; /* 增加頂部內邊距，避免被導航欄遮擋 */
+  padding: 80px 0 40px 0;
   margin: 0;
-  background-color: #13131f;
   color: #f0f0f0;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* 基礎背景 - 深藍紫色宇宙感 */
+.tarot-guide-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, #1e1236 0%, #0d0a1e 100%);
+  z-index: -10;
+}
+
+/* 添加古老符文網格 */
+.tarot-guide-container::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='42' height='44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,0 L40,10 L40,30 L20,40 L0,30 L0,10 Z' stroke='rgba(218,165,32,0.03)' fill='none'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='50' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='15' stroke='rgba(255,255,255,0.02)' fill='none'/%3E%3C/svg%3E");
+  background-size: 80px 80px, 100px 100px;
+  background-position: 0 0, 40px 40px;
+  z-index: -9;
+  opacity: 0.8;
+}
+
+/* 創建交互式星雲效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -8;
+  background: 
+    radial-gradient(circle at 20% 35%, rgba(128, 0, 128, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(0, 32, 128, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* 添加星光效果 - 不同於首頁的星星 */
+.tarot-guide-container .guide-content {
+  position: relative;
+}
+
+.tarot-guide-container .guide-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 2px),
+    radial-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 1.5px),
+    radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 1px);
+  background-size: 500px 500px, 300px 300px, 200px 200px;
+  background-position: 0 0, 30px 50px, 100px 150px;
+  z-index: -7;
+}
+
+/* 增加互動元素櫻浮效果 */
+.filter-button, .flip-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-button:hover, .flip-card:hover {
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.3);
+  transform: translateY(-3px);
+}
+
+/* 卡片輪廓發光效果 */
+.flip-card-inner {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4), 0 0 2px rgba(218, 165, 32, 0.3);
+}
+
+.flip-card:hover .flip-card-inner {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(218, 165, 32, 0.5);
+}
+
+/* 模態框背景 */
+.card-detail-modal .modal-overlay {
+  backdrop-filter: blur(6px);
+  background: radial-gradient(circle at center, rgba(10, 10, 30, 0.85) 0%, rgba(5, 5, 15, 0.95) 100%);
 }
 
 /* 指南內容區域 - 填滿可用寬度 */

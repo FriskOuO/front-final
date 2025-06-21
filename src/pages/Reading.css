@@ -3,10 +3,171 @@
 .reading-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #13131f;
-  padding: 60px 20px 40px; /* 減少頂部間距到 60px */
+  padding: 60px 20px 40px;
   color: #f0e6d2;
   overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* 基礎背景 - 深藍底色 */
+.reading-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1a1025 0%, #0d0a1e 100%);
+  z-index: -10;
+}
+
+/* 添加靈性紋理 */
+.reading-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,5 L95,50 L50,95 L5,50 Z' stroke='rgba(218,165,32,0.02)' fill='none' stroke-width='1'/%3E%3Cpath d='M50,15 L85,50 L50,85 L15,50 Z' stroke='rgba(218,165,32,0.03)' fill='none' stroke-width='1'/%3E%3Cpath d='M50,25 L75,50 L50,75 L25,50 Z' stroke='rgba(218,165,32,0.04)' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  opacity: 0.7;
+  z-index: -9;
+}
+
+/* 添加靈性光暈 */
+.reading-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(186, 85, 211, 0.08) 0%, transparent 40%);
+  z-index: -8;
+  pointer-events: none;
+}
+
+/* 神聖幾何學符號 - 與其他頁面不同 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='15' stroke='rgba(218,165,32,0.03)' fill='none'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40,10 L70,40 L40,70 L10,40 Z' stroke='rgba(255,255,255,0.02)' fill='none'/%3E%3C/svg%3E");
+  background-size: 60px 60px, 80px 80px;
+  background-position: 0 0, 40px 40px;
+  z-index: -7;
+  opacity: 0.6;
+}
+
+/* 添加柔和光線效果 - 聚焦於中央 */
+.cards-spread::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(218, 165, 32, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 卡片增強效果 */
+.card-position {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.5s forwards;
+  animation-delay: var(--delay, 0s);
+  min-height: 300px;
+  height: 100%;
+  overflow: visible;
+  position: relative;
+  backdrop-filter: blur(5px);
+}
+
+.card-position::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, 
+    rgba(218, 165, 32, 0.1) 0%, 
+    transparent 50%,
+    rgba(218, 165, 32, 0.05) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-position:hover::after {
+  opacity: 1;
+}
+
+/* 標題神聖光芒 */
+.reading-title {
+  font-size: 2.2rem;
+  color: #daa520;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+  position: relative;
+}
+
+.reading-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(218, 165, 32, 0.5), transparent);
+}
+
+/* 按鈕光暈效果 */
+.reading-action-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.reading-action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 100%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: -1;
+}
+
+.reading-action-btn:hover::before {
+  transform: scale(2);
+  opacity: 0.1;
 }
 
 .reading-header {

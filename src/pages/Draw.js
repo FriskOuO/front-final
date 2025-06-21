@@ -178,6 +178,11 @@ const Draw = () => {
   
   return (
     <div className="draw-container">
+      {/* 添加流星效果 */}
+      <div className="shooting-star"></div>
+      <div className="shooting-star delay-1"></div>
+      <div className="shooting-star delay-2"></div>
+      
       <div className="draw-header">
         <h1 className="draw-title">{t('draw.title')}</h1>
         <p className="draw-instruction">

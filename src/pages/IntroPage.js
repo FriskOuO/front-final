@@ -12,6 +12,11 @@ const IntroPage = () => {
       <div className="intro-content">
         <TarotIntroFlow />
       </div>
+      {/* 添加流星效果 */}
+      <div className="shooting-star"></div>
+      <div className="shooting-star delay-1"></div>
+      <div className="shooting-star delay-2"></div>
+      <div className="shooting-star delay-3"></div>
     </div>
   );
 };

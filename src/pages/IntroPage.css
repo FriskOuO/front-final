@@ -67,3 +67,139 @@
   position: relative;
   z-index: 2;
 }
+
+/* 添加星空背景特效 */
+.intro-container {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+  overflow: hidden; /* 防止星空溢出 */
+}
+
+/* 星空背景 - 從Home.css複製過來 */
+.intro-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 60, 1) 0%, rgba(5, 5, 15, 1) 100%);
+}
+
+/* 星星效果 */
+.intro-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 2px);
+  background-size: 
+    550px 550px, 
+    350px 350px, 
+    250px 250px,
+    400px 400px;
+  background-position: 
+    0 0, 
+    40px 60px, 
+    130px 270px,
+    70px 100px;
+  animation: twinkle 120s linear infinite;
+  pointer-events: none;
+}
+
+/* 閃爍動畫 */
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  25% { opacity: 0.8; }
+  50% { opacity: 1; }
+  75% { opacity: 0.9; }
+  100% { opacity: 0.7; }
+}
+
+/* 流星效果 - 可選 */
+.shooting-star {
+  position: absolute;
+  width: 150px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 40%, transparent);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+  transform: rotate(-45deg);
+  animation: shootingStar 7s linear infinite;
+  top: 10%;
+  right: 5%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translateX(200px) translateY(-200px) rotate(-45deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(100px) translateY(-100px) rotate(-45deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.8;
+    transform: translateX(-400px) translateY(400px) rotate(-45deg);
+  }
+  100% {
+    transform: translateX(-500px) translateY(500px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* 添加幾個延遲不同的流星 */
+.shooting-star.delay-1 {
+  top: 15%;
+  right: 30%;
+  animation-duration: 9s;
+  animation-delay: -4s; 
+}
+
+.shooting-star.delay-2 {
+  top: 25%;
+  right: 60%;
+  animation-duration: 12s;
+  animation-delay: -5s;
+}
+
+.shooting-star.delay-3 {
+  top: 40%;
+  right: 10%;
+  animation-duration: 8s;
+  animation-delay: -2s;
+}
+
+/* 確保步驟容器在星空背景上方並有適當的視覺效果 */
+.steps-container {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5); /* 透明背景 */
+  backdrop-filter: blur(3px); /* 模糊效果，提升視覺層次 */
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 表單容器樣式優化 */
+.tarot-form-container {
+  background-color: rgba(20, 20, 40, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 30px;
+}

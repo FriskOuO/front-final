@@ -28,6 +28,10 @@ const Result = () => {
   
   return (
     <div className="result-page">
+      {/* 添加光芒效果元素 */}
+      <div className="light-beam beam-1"></div>
+      <div className="light-beam beam-2"></div>
+      
       <div className="language-switcher-container">
         <LanguageSwitcher />
       </div>
