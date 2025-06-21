@@ -278,7 +278,6 @@ const Reading = () => {
     }
     
     console.log(`獲取卡片含義: ID=${card.id}, 類型=${type}, 卡片名稱=${description.name || description.zh}`);
-    console.log('卡片描述資料:', JSON.stringify(description, null, 2));
     
     const position = card.reversed ? 'reversed' : 'upright';
     
@@ -288,15 +287,25 @@ const Reading = () => {
       return null;
     }
     
-    // 獲取指定類型的資料
-    const text = description[position][type];
+    // 根據當前語言選擇含義
+    const langSuffix = i18n.language === 'en' ? '_en' : '';
     
-    if (!text) {
-      console.warn(`卡片 ${description.name || description.zh} 的 ${position}.${type} 資料缺失`);
-      return null;
+    // 首先嘗試獲取當前語言的含義 (例如 core_en)
+    if (description[position][`${type}${langSuffix}`]) {
+      console.log(`使用 ${type}${langSuffix} 內容`);
+      return description[position][`${type}${langSuffix}`];
     }
     
-    return text;
+    // 如果找不到對應語言的含義，則使用默認含義
+    if (description[position][type]) {
+      if (i18n.language === 'en') {
+        console.warn(`卡片 ${description.name} 缺少 ${position}.${type}_en 資料，使用默認資料`);
+      }
+      return description[position][type];
+    }
+    
+    console.warn(`卡片 ${description.name || description.zh} 的 ${position}.${type} 資料缺失`);
+    return null;
   };
   
   // 獲取卡片名稱（多語言支持）
