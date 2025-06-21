@@ -1,7 +1,7 @@
 export const wandsDescriptions = [
   {
     "name": "Ace of Wands",
-    "zh": "權杖Ace",
+    "zh": "權杖一", // 修改：從「權杖Ace」變為「權杖一」
     "upright": {
       "core": "創造力爆發、新計畫展開、充滿熱情",
       "core_en": "Creative explosion, new projects, full of enthusiasm",
@@ -21,7 +21,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Two of Wands",
-    "zh": "權杖Two",
+    "zh": "權杖二", // 修改：從「權杖Two」變為「權杖二」 
     "upright": {
       "core": "計畫遠景、掌握主導、拓展可能",
       "core_en": "Planning vision, taking initiative, expanding possibilities",
@@ -41,7 +41,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Three of Wands",
-    "zh": "權杖Three",
+    "zh": "權杖三", // 修改：從「權杖Three」變为「權杖三」
     "upright": {
       "core": "進展穩定、期待回報、放眼未來",
       "core_en": "Steady progress, expecting returns, looking to the future",
@@ -61,7 +61,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Four of Wands",
-    "zh": "權杖Four",
+    "zh": "權杖四", // 修改：從「權杖Four」變為「權杖四」
     "upright": {
       "core": "穩定、慶典、家庭與社群支持",
       "core_en": "Stability, celebration, family and community support",
@@ -81,7 +81,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Five of Wands",
-    "zh": "權杖Five",
+    "zh": "權杖五", // 修改：從「權杖Five」變為「權杖五」
     "upright": {
       "core": "競爭、挑戰與動態互動",
       "core_en": "Competition, challenges and dynamic interactions",
@@ -101,7 +101,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Six of Wands",
-    "zh": "權杖Six",
+    "zh": "權杖六", // 修改：從「權杖Six」變為「權杖六」
     "upright": {
       "core": "勝利、認可與公開表現",
       "core_en": "Victory, recognition and public performance",
@@ -121,7 +121,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Seven of Wands",
-    "zh": "權杖Seven",
+    "zh": "權杖七", // 修改：從「權杖Seven」變為「權杖七」
     "upright": {
       "core": "堅持立場、捍衛信念、穩固地位",
       "core_en": "Standing firm, defending beliefs, securing position",
@@ -141,7 +141,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Eight of Wands",
-    "zh": "權杖Eight",
+    "zh": "權杖八", // 修改：從「權杖Eight」變為「權杖八」
     "upright": {
       "core": "快速發展、行動加速、好消息來臨",
       "core_en": "Rapid development, accelerated action, good news arriving",
@@ -161,7 +161,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Nine of Wands",
-    "zh": "權杖Nine",
+    "zh": "權杖九", // 修改：從「權杖Nine」變為「權杖九」
     "upright": {
       "core": "堅持到底、防備、累積經驗",
       "core_en": "Perseverance, defense, accumulated experience",
@@ -181,7 +181,7 @@ export const wandsDescriptions = [
   },
   {
     "name": "Ten of Wands",
-    "zh": "權杖Ten",
+    "zh": "權杖十", // 修改：從「權杖Ten」變為「權杖十」
     "upright": {
       "core": "負擔沉重、壓力山大、責任繁重",
       "core_en": "Heavy burden, overwhelming pressure, weighty responsibilities",

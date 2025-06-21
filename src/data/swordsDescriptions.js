@@ -1,7 +1,7 @@
 export const swordsDescriptions = [
   {
     "name": "Ace of Swords",
-    "zh": "寶劍Ace",
+    "zh": "寶劍一",
     "upright": {
       "core": "真相顯現、心智清明、想法啟動",
       "core_en": "Truth revealed, mental clarity, thoughts activated",
@@ -21,7 +21,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Two of Swords",
-    "zh": "寶劍Two",
+    "zh": "寶劍二",
     "upright": {
       "core": "內在平衡、保持中立、避免衝突",
       "core_en": "Inner balance, maintaining neutrality, avoiding conflict",
@@ -41,7 +41,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Three of Swords",
-    "zh": "寶劍Three",
+    "zh": "寶劍三",
     "upright": {
       "core": "心碎、失落、悲傷的真相",
       "core_en": "Heartbreak, loss, sorrowful truth",
@@ -61,7 +61,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Four of Swords",
-    "zh": "寶劍Four",
+    "zh": "寶劍四",
     "upright": {
       "core": "休息、靜養、暫時撤退",
       "core_en": "Rest, recuperation, temporary withdrawal",
@@ -81,7 +81,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Five of Swords",
-    "zh": "寶劍Five",
+    "zh": "寶劍五",
     "upright": {
       "core": "勝之不武、自私爭奪、關係緊張",
       "core_en": "Pyrrhic victory, selfish competition, relationship tension",
@@ -101,7 +101,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Six of Swords",
-    "zh": "寶劍Six",
+    "zh": "寶劍六",
     "upright": {
       "core": "平靜轉移、離開困境、心靈安定",
       "core_en": "Peaceful transition, leaving difficulties behind, mental calm",
@@ -121,7 +121,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Seven of Swords",
-    "zh": "寶劍Seven",
+    "zh": "寶劍七",
     "upright": {
       "core": "秘密行動、策略佈局、謀略運用",
       "core_en": "Secret operations, strategic planning, tactical maneuvering",
@@ -141,7 +141,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Eight of Swords",
-    "zh": "寶劍Eight",
+    "zh": "寶劍八",
     "upright": {
       "core": "限制、自我束縛、看不清出口",
       "core_en": "Limitations, self-constraint, unable to see the way out",
@@ -161,7 +161,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Nine of Swords",
-    "zh": "寶劍Nine",
+    "zh": "寶劍九",
     "upright": {
       "core": "焦慮、失眠、思慮過度",
       "core_en": "Anxiety, insomnia, overthinking",
@@ -181,7 +181,7 @@ export const swordsDescriptions = [
   },
   {
     "name": "Ten of Swords",
-    "zh": "寶劍Ten",
+    "zh": "寶劍十",
     "upright": {
       "core": "終結、背叛、極度痛苦",
       "core_en": "Ending, betrayal, extreme suffering",

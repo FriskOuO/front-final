@@ -1,7 +1,7 @@
 export const cupsDescriptions = [
   {
     "name": "Ace of Cups",
-    "zh": "聖杯Ace",
+    "zh": "聖杯一",
     "upright": {
       "core": "新感情的開端、靈感湧現、充滿愛的潛能",
       "core_en": "New emotional beginnings, inspiration, potential for love",
@@ -21,7 +21,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Two of Cups",
-    "zh": "聖杯Two",
+    "zh": "聖杯二",
     "upright": {
       "core": "情感共鳴、合作關係、靈魂連結",
       "core_en": "Emotional harmony, partnership, soul connection",
@@ -41,7 +41,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Three of Cups",
-    "zh": "聖杯Three",
+    "zh": "聖杯三",
     "upright": {
       "core": "歡聚、友情支持、值得慶祝的里程碑",
       "core_en": "Celebration, friendship support, milestones worth celebrating",
@@ -61,7 +61,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Four of Cups",
-    "zh": "聖杯Four",
+    "zh": "聖杯四",
     "upright": {
       "core": "沉思、內在空虛、忽略機會",
       "core_en": "Contemplation, inner emptiness, overlooking opportunities",
@@ -81,7 +81,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Five of Cups",
-    "zh": "聖杯Five",
+    "zh": "聖杯五",
     "upright": {
       "core": "悲傷、失望、情感上的損失",
       "core_en": "Grief, disappointment, emotional loss",
@@ -101,7 +101,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Six of Cups",
-    "zh": "聖杯Six",
+    "zh": "聖杯六",
     "upright": {
       "core": "懷舊、童年記憶、單純的情感",
       "core_en": "Nostalgia, childhood memories, innocent emotions",
@@ -121,7 +121,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Seven of Cups",
-    "zh": "聖杯Seven",
+    "zh": "聖杯七",
     "upright": {
       "core": "選擇繁多、幻想、陷入情感混亂",
       "core_en": "Multiple choices, fantasy, emotional confusion",
@@ -141,7 +141,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Eight of Cups",
-    "zh": "聖杯Eight",
+    "zh": "聖杯八",
     "upright": {
       "core": "放下、轉身離開、內在尋求",
       "core_en": "Letting go, walking away, inner seeking",
@@ -161,7 +161,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Nine of Cups",
-    "zh": "聖杯Nine",
+    "zh": "聖杯九",
     "upright": {
       "core": "情感滿足、願望實現、幸福的果實",
       "core_en": "Emotional satisfaction, wish fulfillment, fruits of happiness",
@@ -181,7 +181,7 @@ export const cupsDescriptions = [
   },
   {
     "name": "Ten of Cups",
-    "zh": "聖杯Ten",
+    "zh": "聖杯十",
     "upright": {
       "core": "圓滿、家庭幸福、情感長久",
       "core_en": "Fulfillment, family happiness, lasting emotions",

@@ -88,5 +88,35 @@
     "description": "Description",
     "advice": "Advice",
     "closeModal": "Close"
+  },
+  "reading": {
+    "position": {
+      "single": "Guidance",
+      "past": "Past",
+      "present": "Present",
+      "future": "Future",
+      "you": "You",
+      "other": "Others / Environment",
+      "challenge": "Challenge",
+      "opportunity": "Opportunity",
+      "advice": "Advice",
+      "outcome": "Outcome"
+    },
+    "positionMeaning": "Position meaning",
+    "tarotReading": "Tarot Reading",
+    "loveReading": "Love Reading",
+    "careerReading": "Career Reading",
+    "generalReading": "General Reading",
+    "directionReading": "Direction Reading",
+    "healingReading": "Healing Reading",
+    "decisionReading": "Decision Reading",
+    "growthReading": "Growth Reading",
+    "coreMeaning": "Core Meaning",
+    "advice": "Advice",
+    "reversed": "Reversed",
+    "drawAgain": "Draw Again",
+    "returnHome": "Return Home",
+    "missingData": "This card is missing core meaning interpretation",
+    "missingAdviceData": "This card is missing advice interpretation"
   }
 }

@@ -1,42 +1,49 @@
 /* 塔羅牌解讀頁面樣式 */
 
 .reading-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  color: #f0e6d2;
+  width: 100%;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #13131f;
+  padding: 60px 20px 40px; /* 減少頂部間距到 60px */
+  color: #f0e6d2;
+  overflow-x: hidden;
 }
 
 .reading-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  border-bottom: 1px solid rgba(218, 165, 32, 0.3);
-  padding-bottom: 15px;
+  justify-content: center; /* 更改為居中，因為沒有右側語言切換按鈕 */
+  margin-bottom: 25px; /* 減少頂部和內容之間的間距 */
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .reading-title {
-  font-size: 2rem;
-  margin: 0;
+  font-size: 2.2rem;
   color: #daa520;
-  text-shadow: 0 0 5px rgba(218, 165, 32, 0.5);
+  margin: 0;
+  text-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
 }
 
-/* 卡片佈局容器 */
 .reading-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* 卡片展示區域 */
 .cards-spread {
+  margin-top: 10px; /* 減少標題下方的間距 */
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px; /* 從 40px 減少到 30px */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.cards-spread.loaded {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* 單一卡片佈局 */
@@ -47,14 +54,18 @@
 
 /* 三卡佈局 */
 .spread-3 {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  gap: 24px;
 }
 
 /* 六卡佈局 */
 .spread-6 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 24px;
 }
 
 /* 卡片位置容器 */
@@ -67,11 +78,36 @@
   border-radius: 10px;
   padding: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.5s forwards;
+  animation-delay: var(--delay, 0s);
+  min-height: 300px; /* 確保最小高度 */
+  height: 100%; /* 允許自動擴展 */
+  overflow: visible; /* 避免內容被截斷 */
 }
 
 .card-position:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(218, 165, 32, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-label {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+.reversed-tag {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #daa520;
+  font-weight: bold;
+  font-size: 0.7rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid #daa520;
 }
 
 .position-title {
@@ -79,36 +115,55 @@
   font-size: 1.3rem;
   margin: 0;
   text-align: center;
+  position: relative;
+}
+
+.position-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #daa520;
+  color: #13131f;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* 卡片容器 */
 .card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .card-container {
     flex-direction: row;
     align-items: flex-start;
   }
 }
 
-/* 卡片樣式 */
+/* 卡片本身 */
 .card {
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
+  width: 160px;
+  flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
-  flex-shrink: 0;
-  transition: transform 0.3s;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative; /* 為標籤絕對定位提供參考 */
 }
 
 .card:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.6);
 }
 
 .card.reversed {
@@ -128,6 +183,8 @@
 /* 卡片解讀 */
 .card-interpretation {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-name {
@@ -143,6 +200,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  flex: 1;
 }
 
 .meaning-section h5 {
@@ -154,52 +212,93 @@
 
 .meaning-section p {
   margin: 0;
-  line-height: 1.5;
-  color: #f0e6d2;
-}
-
-/* 結論 */
-.reading-conclusion {
-  background-color: rgba(218, 165, 32, 0.1);
-  border-left: 4px solid #daa520;
-  padding: 15px 20px;
-  font-style: italic;
   line-height: 1.6;
-  margin: 20px 0;
+  color: #f0e6d2;
+  white-space: normal;
+  word-break: break-word;
+  margin-top: 8px;
 }
 
-/* 按鈕 */
+/* 操作按鈕 */
 .reading-actions {
   display: flex;
-  gap: 15px;
   justify-content: center;
-  margin-top: 30px;
+  gap: 20px;
+  margin-top: 50px;
 }
 
-.action-button {
-  background-color: rgba(218, 165, 32, 0.2);
+.reading-action-btn {
+  background-color: transparent;
+  border: 2px solid #daa520;
   color: #daa520;
-  border: 1px solid #835c2b;
-  padding: 10px 20px;
-  border-radius: 30px;
+  padding: 12px 24px;
   font-size: 1rem;
+  border-radius: 30px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  min-width: 160px;
 }
 
-.action-button:hover {
-  background-color: rgba(218, 165, 32, 0.3);
-  box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+.reading-action-btn:hover {
+  background-color: #daa520;
+  color: #13131f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
 }
 
-.action-button.new-reading {
-  background-color: rgba(218, 165, 32, 0.3);
+.draw-again-btn {
+  background-color: rgba(218, 165, 32, 0.2);
 }
 
-/* 響應式調整 */
-@media (max-width: 768px) {
+/* 位置說明樣式 */
+.position-explanation {
+  margin: 5px 0 15px;
+  color: #daa520;
+  font-style: italic;
+  font-size: 0.95rem;
+  text-align: center;
+  border-bottom: 1px dotted rgba(218, 165, 32, 0.3);
+  padding-bottom: 8px;
+}
+
+/* 動畫 */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 響應式處理 */
+@media screen and (max-width: 768px) {
+  .reading-page {
+    padding-top: 80px; /* 移動端稍微減少頂部間距 */
+  }
+
+  .reading-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .reading-title {
+    font-size: 1.8rem;
+  }
+  
+  .spread-3 {
+    flex-direction: column;
+  }
+  
   .spread-6 {
     grid-template-columns: 1fr;
+  }
+  
+  .card {
+    width: 140px;
   }
   
   .card-container {
@@ -207,11 +306,50 @@
     align-items: center;
   }
   
-  .card {
-    max-width: 150px;
+  .card-interpretation {
+    text-align: center;
+    margin-top: 15px;
   }
   
   .reading-actions {
     flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
+  
+  .reading-action-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* 針對平板尺寸的優化 */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .spread-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 資料缺失警示樣式 */
+.missing-data {
+  color: #ff9e43;
+  font-style: italic;
+  background-color: rgba(255, 158, 67, 0.1);
+  border: 1px dashed rgba(255, 158, 67, 0.3);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/* 添加到現有 CSS 檔案 */
+
+.card-debug-info {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 158, 67, 0.7);
+  margin-top: 4px;
+  font-style: normal;
+  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }

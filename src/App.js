@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Draw from './pages/Draw';
-import Result from './pages/Result';
+import Reading from './pages/Reading';
 import TarotGuide from './pages/TarotGuide';
 import IntroPage from './pages/IntroPage';
 import Navbar from './components/Navbar';
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/intro" element={<IntroPage />} />
           <Route path="/draw" element={<Draw />} />
-          <Route path="/result" element={<Result />} />
+          <Route path="/reading" element={<Reading />} />
           <Route path="/tarot-guide" element={<TarotGuide />} />
         </Routes>
       </Router>

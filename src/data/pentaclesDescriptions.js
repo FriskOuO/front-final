@@ -1,7 +1,7 @@
 export const pentaclesDescriptions = [
   {
     "name": "Ace of Pentacles",
-    "zh": "星幣Ace",
+    "zh": "星幣一", // 修改：從「錢幣一」變為「星幣一」
     "upright": {
       "core": "財務新機、穩定開端、實質收穫",
       "core_en": "New financial opportunities, stable beginnings, tangible rewards",
@@ -21,7 +21,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Two of Pentacles",
-    "zh": "星幣Two",
+    "zh": "星幣二", // 修改：從「錢幣二」變為「星幣二」
     "upright": {
       "core": "資源平衡、多工管理、靈活應變",
       "core_en": "Resource balance, multitasking, adaptable response",
@@ -41,7 +41,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Three of Pentacles",
-    "zh": "星幣Three",
+    "zh": "星幣三", // 修改：從「錢幣三」變為「星幣三」
     "upright": {
       "core": "合作共創、技能展現、專業肯定",
       "core_en": "Collaborative creation, skill demonstration, professional recognition",
@@ -61,7 +61,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Four of Pentacles",
-    "zh": "星幣Four",
+    "zh": "星幣四", // 修改：從「錢幣四」變為「星幣四」
     "upright": {
       "core": "掌控、儲蓄、財務保守",
       "core_en": "Control, savings, financial conservatism",
@@ -81,7 +81,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Five of Pentacles",
-    "zh": "星幣Five",
+    "zh": "星幣五", // 修改：從「錢幣五」變為「星幣五」
     "upright": {
       "core": "貧困、孤立、經濟困境",
       "core_en": "Poverty, isolation, economic hardship",
@@ -101,7 +101,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Six of Pentacles",
-    "zh": "星幣Six",
+    "zh": "星幣六", // 修改：從「錢幣六」變為「星幣六」
     "upright": {
       "core": "資源分享、施與受、金錢流動",
       "core_en": "Resource sharing, giving and receiving, money flow",
@@ -121,7 +121,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Seven of Pentacles",
-    "zh": "星幣Seven",
+    "zh": "星幣七", // 修改：從「錢幣七」變為「星幣七」
     "upright": {
       "core": "等待收成、成果評估、耐心耕耘",
       "core_en": "Waiting for harvest, evaluating results, patient cultivation",
@@ -141,7 +141,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Eight of Pentacles",
-    "zh": "星幣Eight",
+    "zh": "星幣八", // 修改：從「錢幣八」變為「星幣八」
     "upright": {
       "core": "勤奮學習、技能精進、專注努力",
       "core_en": "Diligent learning, skill refinement, focused effort",
@@ -161,7 +161,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Nine of Pentacles",
-    "zh": "星幣Nine",
+    "zh": "星幣九", // 修改：從「錢幣九」變為「星幣九」
     "upright": {
       "core": "豐盛獨立、自我價值、物質成就",
       "core_en": "Abundant independence, self-worth, material achievement",
@@ -181,7 +181,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Ten of Pentacles",
-    "zh": "星幣Ten",
+    "zh": "星幣十", // 修改：從「錢幣十」變為「星幣十」
     "upright": {
       "core": "長期穩定、家庭財富、世代傳承",
       "core_en": "Long-term stability, family wealth, generational legacy",
@@ -201,7 +201,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Page of Pentacles",
-    "zh": "星幣侍者",
+    "zh": "星幣侍者", // 修改：從「錢幣侍者」變為「星幣侍者」
     "upright": {
       "core": "財務學習、實踐精神、腳踏實地",
       "core_en": "Financial learning, practical spirit, down-to-earth approach",
@@ -221,7 +221,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Knight of Pentacles",
-    "zh": "星幣騎士",
+    "zh": "星幣騎士", // 修改：從「錢幣騎士」變為「星幣騎士」
     "upright": {
       "core": "穩健前進、責任感強、踏實執行",
       "core_en": "Steady progress, strong sense of responsibility, solid execution",
@@ -241,7 +241,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "Queen of Pentacles",
-    "zh": "星幣皇后",
+    "zh": "星幣皇后", // 修改：從「錢幣皇后」變為「星幣皇后」
     "upright": {
       "core": "務實細膩、滋養能量、財務管理者",
       "core_en": "Practical and detailed, nurturing energy, financial manager",
@@ -261,7 +261,7 @@ export const pentaclesDescriptions = [
   },
   {
     "name": "King of Pentacles",
-    "zh": "星幣國王",
+    "zh": "星幣國王", // 修改：從「錢幣國王」變為「星幣國王」
     "upright": {
       "core": "穩重成功、資源掌控、可靠領導",
       "core_en": "Steady success, resource control, reliable leadership",

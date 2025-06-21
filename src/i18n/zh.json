@@ -124,5 +124,35 @@
     "title": "抽選塔羅牌",
     "shuffle": "洗牌",
     "instruction": "請從牌桌選擇 {count} 張直覺吸引你的牌"
+  },
+  "reading": {
+    "position": {
+      "single": "指引",
+      "past": "過去",
+      "present": "現在",
+      "future": "未來",
+      "you": "自己",
+      "other": "他方 / 環境",
+      "challenge": "挑戰",
+      "opportunity": "機會",
+      "advice": "建議",
+      "outcome": "結果"
+    },
+    "positionMeaning": "位置代表",
+    "tarotReading": "塔羅解讀",
+    "loveReading": "愛情解讀",
+    "careerReading": "事業解讀",
+    "generalReading": "一般解讀",
+    "directionReading": "方向解讀",
+    "healingReading": "療癒解讀",
+    "decisionReading": "決策解讀",
+    "growthReading": "成長解讀",
+    "coreMeaning": "核心含義",
+    "advice": "建議",
+    "reversed": "逆位",
+    "drawAgain": "重新占卜",
+    "returnHome": "返回首頁",
+    "missingData": "此牌卡缺少核心含義解釋資料",
+    "missingAdviceData": "此牌卡缺少建議解釋資料"
   }
 }
